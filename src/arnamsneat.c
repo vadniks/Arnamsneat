@@ -4,27 +4,27 @@
 
 static defsAtomic bool gInitialized = false;
 
-void arnamsneatInit(void) {
+void amstInit(void) {
     if (gInitialized) return;
     gInitialized = true;
 }
 
-ARNAMSNEAT_NONNULL() ARNAMSNEAT_RETURNS_NONNULL
-ArnamsneatRenderer* arnamsneatCreateRenderer(SDL_Window* window) {
+AMST_NONNULL() AMST_RETURNS_NONNULL
+AmstRenderer* amstCreateRenderer(SDL_Window* window) {
     DEFS_USED(window);
     return (void*) 0x1;
 }
 
-void arnamsneatProcessEvents(void) {
+void amstProcessEvents(void) {
     defsAssert(gInitialized);
 }
 
-ARNAMSNEAT_NONNULL()
-void arnamsneatDestroyRenderer(SDL_Window* window) {
+AMST_NONNULL()
+void amstDestroyRenderer(SDL_Window* window) {
     DEFS_USED(window);
 }
 
-void arnamsneatQuit(void) {
+void amstQuit(void) {
     if (!gInitialized) return;
     gInitialized = false;
 }

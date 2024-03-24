@@ -3,13 +3,12 @@
 #include <arnamsneat.h>
 
 int main(void) {
-    arnamsneatInit();
+    amstInit();
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_TIMER) != 0)
         abort();
 
 
-
-    arnamsneatQuit();
+    amstQuit();
     return 0;
 }

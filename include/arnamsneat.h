@@ -7,26 +7,26 @@
 #   error
 #endif
 
-#define ARNAMSNEAT_EXPORT [[gnu::visibility("default")]]
-#define ARNAMSNEAT_NONNULL(...) [[gnu::nonnull(__VA_ARGS__)]]
-#define ARNAMSNEAT_RETURNS_NONNULL [[gnu::returns_nonnull]]
+#define AMST_EXPORT [[gnu::visibility("default")]]
+#define AMST_NONNULL(...) [[gnu::nonnull(__VA_ARGS__)]]
+#define AMST_RETURNS_NONNULL [[gnu::returns_nonnull]]
 
-struct _ArnamsneatRenderer;
-typedef struct _ArnamsneatRenderer ArnamsneatRenderer;
+struct _AmstRenderer;
+typedef struct _AmstRenderer AmstRenderer;
 
-ARNAMSNEAT_EXPORT
-void arnamsneatInit(void);
+AMST_EXPORT
+void amstInit(void);
 
-ARNAMSNEAT_EXPORT
-ARNAMSNEAT_NONNULL() ARNAMSNEAT_RETURNS_NONNULL
-ArnamsneatRenderer* arnamsneatCreateRenderer(SDL_Window* window);
+AMST_EXPORT
+AMST_NONNULL() AMST_RETURNS_NONNULL
+AmstRenderer* amstCreateRenderer(SDL_Window* window);
 
-ARNAMSNEAT_EXPORT
-void arnamsneatProcessEvents(void);
+AMST_EXPORT
+void amstProcessEvents(void);
 
-ARNAMSNEAT_EXPORT
-ARNAMSNEAT_NONNULL()
-void arnamsneatDestroyRenderer(SDL_Window* window);
+AMST_EXPORT
+AMST_NONNULL()
+void amstDestroyRenderer(SDL_Window* window);
 
-ARNAMSNEAT_EXPORT
-void arnamsneatQuit(void);
+AMST_EXPORT
+void amstQuit(void);
