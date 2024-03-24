@@ -10,6 +10,7 @@ add_compile_options("-Wextra")
 add_compile_options("-Wpedantic")
 add_compile_options("-O3")
 add_compile_options("-fvisibility=hidden")
+add_link_options("-s")
 
 file(GLOB SOURCES CONFIGURE_DEPENDS src/*.c src/*.h)
 file(GLOB INCLUDES CONFIGURE_DEPENDS include/*.h)
