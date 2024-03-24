@@ -10,4 +10,5 @@
 #define ARNAMSNEAT_API [[gnu::visibility("default")]]
 
 ARNAMSNEAT_API bool arnamsneatInit(void);
+ARNAMSNEAT_API bool arnamsneatProcessEvents(void);
 ARNAMSNEAT_API bool arnamsneatQuit(void);

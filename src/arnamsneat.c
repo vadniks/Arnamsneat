@@ -1,12 +1,25 @@
 
-#include "../include/arnamsneat.h"
+#include "arnamsneat.h"
+#include "defs.h"
+#include <assert.h>
+
+static ATOMIC bool gInitialized = false;
 
 bool arnamsneatInit(void) {
-    SDL_Log("init");
+    if (gInitialized) return false;
+    if (!defsSdlSuccessful(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER)))
+        return false;
+
+    gInitialized = true;
+    return true;
+}
+
+bool arnamsneatProcessEvents(void) {
+    assert(gInitialized);
     return false;
 }
 
 bool arnamsneatQuit(void) {
-    SDL_Log("quit");
-    return false;
+    if (!gInitialized) return false;
+    return true;
 }
