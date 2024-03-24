@@ -17,11 +17,14 @@
 #   define AMST_NONNULL
 #endif
 
-struct _AmstRenderer;
+struct AMST_EXPORT _AmstRenderer;
 typedef struct _AmstRenderer AmstRenderer;
 
 AMST_EXPORT
 void amstInit(void);
+
+AMST_EXPORT
+void amstSetSdlRendererHints(void);
 
 AMST_EXPORT
 AmstRenderer* AMST_NULLABLE amstCreateRenderer(SDL_Window* AMST_NONNULL window);
