@@ -65,7 +65,7 @@ void amstProcessEvents(void) {
 
 void amstContextDestroy(AmstContext* AMST_NONNULL context) {
     defsAssert(gInitialized);
-    DEFS_USED(context);
+    defsFree(context);
 }
 
 void amstQuit(void) {
