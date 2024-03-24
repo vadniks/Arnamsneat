@@ -3,11 +3,11 @@
 
 #include <SDL2/SDL.h>
 
-#ifndef __GNUC__
+#if !defined(__GNUC__) || __STDC_VERSION__ < 202000L
 #   error
 #endif
 
 #define ARNAMSNEAT_API [[gnu::visibility("default")]]
 
 ARNAMSNEAT_API bool arnamsneatInit(void);
-ARNAMSNEAT_API extern bool arnamsneatQuit(void);
+ARNAMSNEAT_API bool arnamsneatQuit(void);
