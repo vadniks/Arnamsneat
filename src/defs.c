@@ -12,3 +12,11 @@ void* AMST_NONNULL defsMalloc(size_t size) {
     defsAssert(pointer != nullptr);
     return pointer;
 }
+
+void* AMST_NONNULL defsRealloc(void* AMST_NULLABLE memory, size_t size) {
+    void* const pointer = SDL_realloc(memory, size);
+    defsAssert(pointer != nullptr);
+    return pointer;
+}
+
+void defsFree(void* AMST_NULLABLE memory) { SDL_free(memory); }
