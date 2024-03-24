@@ -1,6 +1,12 @@
 
 #include "arnamsneat.h"
 #include "defs.h"
+#include <stdint.h>
+
+struct _AmstContext {
+    int32_t windowWidth, windowHeight, rendererWidth, rendererHeight;
+    float scaleX, scaleY;
+};
 
 static defsAtomic bool gInitialized = false;
 

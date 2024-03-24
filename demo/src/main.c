@@ -19,6 +19,8 @@ int main(void) {
     amstSetSdlRendererHints();
     SDL_Renderer* renderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
+    SDL_Delay(1000);
+
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
 

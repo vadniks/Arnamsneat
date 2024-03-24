@@ -1,6 +1,7 @@
 
 #pragma once
 
+#include "arnamsneatPrivate.h"
 #include <SDL2/SDL.h>
 
 #if !defined(__GNUC__) || !defined(__STDC__) || __STDC_VERSION__ < 202000L
@@ -8,14 +9,6 @@
 #endif
 
 #define AMST_EXPORT [[gnu::visibility("default")]]
-
-#ifdef __clang__
-#   define AMST_NULLABLE _Nullable
-#   define AMST_NONNULL _Nonnull
-#else
-#   define AMST_NULLABLE
-#   define AMST_NONNULL
-#endif
 
 struct AMST_EXPORT _AmstContext;
 typedef struct _AmstContext AmstContext;
