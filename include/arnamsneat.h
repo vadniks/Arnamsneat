@@ -17,8 +17,8 @@
 #   define AMST_NONNULL
 #endif
 
-struct AMST_EXPORT _AmstRenderer;
-typedef struct _AmstRenderer AmstRenderer;
+struct AMST_EXPORT _AmstContext;
+typedef struct _AmstContext AmstContext;
 
 AMST_EXPORT
 void amstInit(void);
@@ -27,13 +27,13 @@ AMST_EXPORT
 void amstSetSdlRendererHints(void);
 
 AMST_EXPORT
-AmstRenderer* AMST_NULLABLE amstCreateRenderer(SDL_Window* AMST_NONNULL window);
+AmstContext* AMST_NULLABLE amstContextCreate(SDL_Window* AMST_NONNULL window);
 
 AMST_EXPORT
 void amstProcessEvents(void);
 
 AMST_EXPORT
-void amstDestroyRenderer(SDL_Window* AMST_NONNULL window);
+void amstContextDestroy(AmstContext* AMST_NONNULL context);
 
 AMST_EXPORT
 void amstQuit(void);

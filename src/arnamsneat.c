@@ -18,7 +18,7 @@ void amstSetSdlRendererHints(void) {
     defsAssert(SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2"));
 }
 
-AmstRenderer* AMST_NULLABLE amstCreateRenderer(SDL_Window* AMST_NONNULL window) {
+AmstContext* AMST_NULLABLE amstContextCreate(SDL_Window* AMST_NONNULL window) {
     defsAssert(gInitialized);
     DEFS_USED(window);
     return (void*) 0x1;
@@ -28,9 +28,9 @@ void amstProcessEvents(void) {
     defsAssert(gInitialized);
 }
 
-void amstDestroyRenderer(SDL_Window* AMST_NONNULL window) {
+void amstContextDestroy(AmstContext* AMST_NONNULL context) {
     defsAssert(gInitialized);
-    DEFS_USED(window);
+    DEFS_USED(context);
 }
 
 void amstQuit(void) {
