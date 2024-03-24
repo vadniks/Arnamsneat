@@ -9,8 +9,7 @@ void amstInit(void) {
     gInitialized = true;
 }
 
-AMST_NONNULL() AMST_RETURNS_NONNULL
-AmstRenderer* amstCreateRenderer(SDL_Window* window) {
+AmstRenderer* AMST_NULLABLE amstCreateRenderer(SDL_Window* AMST_NONNULL window) {
     DEFS_USED(window);
     return (void*) 0x1;
 }
@@ -19,8 +18,7 @@ void amstProcessEvents(void) {
     defsAssert(gInitialized);
 }
 
-AMST_NONNULL()
-void amstDestroyRenderer(SDL_Window* window) {
+void amstDestroyRenderer(SDL_Window* AMST_NONNULL window) {
     DEFS_USED(window);
 }
 

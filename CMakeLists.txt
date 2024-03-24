@@ -12,6 +12,8 @@ add_compile_options("-O3")
 add_compile_options("-fvisibility=hidden")
 add_link_options("-s")
 
+add_compile_options("-Wno-nullability-extension")
+
 file(GLOB SOURCES CONFIGURE_DEPENDS src/*.c src/*.h)
 file(GLOB INCLUDES CONFIGURE_DEPENDS include/*.h)
 add_library(${PROJECT_NAME} SHARED ${SOURCES} ${INCLUDES})
