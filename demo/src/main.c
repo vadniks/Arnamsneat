@@ -27,7 +27,18 @@ int main(void) {
     amstSetSdlRendererHints();
     SDL_Renderer* renderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
-    SDL_Delay(1000);
+    int msecs = 0;
+    SDL_Event event;
+    while (msecs < 5000) {
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) goto end;
+            amstProcessEvent(&event);
+        }
+
+        msecs += 10;
+        SDL_Delay(10);
+    }
+    end:
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);

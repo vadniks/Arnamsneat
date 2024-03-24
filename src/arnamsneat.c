@@ -59,8 +59,9 @@ AmstContext* AMST_NULLABLE amstContextCreate(
     return context;
 }
 
-void amstProcessEvents(void) {
+void amstProcessEvent(SDL_Event* AMST_NONNULL event) {
     defsAssert(gInitialized);
+    DEFS_USED(event);
 }
 
 void amstContextDestroy(AmstContext* AMST_NONNULL context) {
