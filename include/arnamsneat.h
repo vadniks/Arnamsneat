@@ -12,7 +12,7 @@
 #include "arnamsneatPrivate.h"
 #include <SDL2/SDL.h>
 
-#if !defined(__GNUC__) || !defined(__STDC__) || __STDC_VERSION__ < 202000L
+#if !defined(__GNUC__) || !defined(__STDC__) || __STDC_VERSION__ < 202000L // C23
 #   error
 #endif
 
