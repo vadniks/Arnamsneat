@@ -4,10 +4,12 @@
 
 static ATOMIC bool gInitialized = false;
 
-bool arnamsneatInit(void) {
+bool arnamsneatInit(uint32_t flags) {
     if (gInitialized) return false;
-    if (!defsSuccessful(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER)))
+
+    if (!defsSuccessful(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_TIMER | flags)))
         return false;
+
 
     gInitialized = true;
     return true;
