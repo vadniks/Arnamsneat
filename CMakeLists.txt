@@ -25,3 +25,5 @@ set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER include/arnamsnea
 
 set(EXE_DEMO exeDemo)
 add_subdirectory(demo)
+
+file(COPY demo/res DESTINATION ${CMAKE_BINARY_DIR}/demo)

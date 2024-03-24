@@ -26,6 +26,8 @@ int main(void) {
 
     amstSetSdlRendererHints();
     SDL_Renderer* renderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    TTF_Font* font = TTF_OpenFont("res/RobotoMono.ttf", 1);
+    AmstContext* context = amstContextCreate(window, renderer, font);
 
     int msecs = 0;
     SDL_Event event;
@@ -40,6 +42,8 @@ int main(void) {
     }
     end:
 
+    amstContextDestroy(context);
+    TTF_CloseFont(font);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
 
