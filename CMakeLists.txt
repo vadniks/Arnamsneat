@@ -15,7 +15,7 @@ file(GLOB SOURCES CONFIGURE_DEPENDS src/*.c src/*.h)
 file(GLOB INCLUDES CONFIGURE_DEPENDS include/*.h)
 add_library(${PROJECT_NAME} SHARED ${SOURCES} ${INCLUDES})
 
-target_link_libraries(${PROJECT_NAME} SDL2 GL GLEW)
+target_link_libraries(${PROJECT_NAME} SDL2 SDL2_image SDL2_ttf GL GLEW m)
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
