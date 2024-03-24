@@ -11,8 +11,8 @@ int main(void) {
         "Title",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
-        160,
-        90,
+        160 * 5,
+        90 * 5,
         SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
     );
 
