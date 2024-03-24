@@ -3,4 +3,5 @@
 
 #define ATOMIC _Atomic
 
-inline bool defsSdlSuccessful(int result) { return result == 0; }
+void defsAssert(bool condition);
+bool defsSuccessful(int result);
