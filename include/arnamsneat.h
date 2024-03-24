@@ -39,6 +39,9 @@ AMST_EXPORT
 void amstProcessEvent(SDL_Event* AMST_NONNULL event);
 
 AMST_EXPORT
+void amstDraw(AmstContext* AMST_NONNULL context);
+
+AMST_EXPORT
 void amstContextDestroy(AmstContext* AMST_NONNULL context);
 
 AMST_EXPORT

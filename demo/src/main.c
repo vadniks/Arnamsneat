@@ -29,6 +29,7 @@ int main(void) {
             amstProcessEvent(&event);
         }
 
+        amstDraw(context);
         msecs += 10;
         SDL_Delay(10);
     }

@@ -64,6 +64,11 @@ void amstProcessEvent(SDL_Event* AMST_NONNULL event) {
     DEFS_USED(event);
 }
 
+void amstDraw(AmstContext* AMST_NONNULL context) {
+    defsAssert(gInitialized);
+    DEFS_USED(context);
+}
+
 void amstContextDestroy(AmstContext* AMST_NONNULL context) {
     defsAssert(gInitialized);
     defsFree(context);
