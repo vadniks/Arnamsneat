@@ -13,7 +13,8 @@
 
 struct _AmstContext {
     int32_t windowWidth, windowHeight, rendererWidth, rendererHeight;
-    float scaleX, scaleY;
+    float scaleX, scaleY, scaleFont;
+    TTF_Font* AMST_NONNULL font;
 };
 
 static defsAtomic bool gInitialized = false;
@@ -32,10 +33,30 @@ void amstSetSdlRendererHints(void) {
     defsAssert(SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2"));
 }
 
-AmstContext* AMST_NULLABLE amstContextCreate(SDL_Window* AMST_NONNULL window) {
+AmstContext* AMST_NULLABLE amstContextCreate(
+    SDL_Window* AMST_NONNULL window,
+    SDL_Renderer* AMST_NONNULL renderer,
+    TTF_Font* AMST_NONNULL font
+) {
     defsAssert(gInitialized);
-    DEFS_USED(window);
-    return (void*) 0x1;
+
+    AmstContext* context = defsMalloc(sizeof *context);
+    SDL_GetWindowSize(window, &(context->windowWidth), &(context->windowHeight));
+    SDL_GetRendererOutputSize(renderer, &(context->rendererWidth), &(context->rendererHeight));
+    context->scaleX = (float) context->rendererWidth / (float) context->windowWidth;
+    context->scaleY = (float) context->rendererHeight / (float) context->windowHeight;
+
+    SDL_SetWindowMinimumSize(
+        window,
+        (int) ((float) context->windowWidth * context->scaleX),
+        (int) ((float) context->windowHeight * context->scaleY)
+    );
+    SDL_RenderSetScale(renderer, context->scaleX, context->scaleY);
+
+    context->scaleFont = context->scaleY;
+    context->font = font;
+
+    return context;
 }
 
 void amstProcessEvents(void) {

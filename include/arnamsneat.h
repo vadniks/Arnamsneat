@@ -11,6 +11,7 @@
 
 #include "arnamsneatPrivate.h"
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 #if !defined(__GNUC__) || !defined(__STDC__) || __STDC_VERSION__ < 202000L // C23
 #   error
@@ -28,7 +29,11 @@ AMST_EXPORT
 void amstSetSdlRendererHints(void);
 
 AMST_EXPORT
-AmstContext* AMST_NULLABLE amstContextCreate(SDL_Window* AMST_NONNULL window);
+AmstContext* AMST_NULLABLE amstContextCreate(
+    SDL_Window* AMST_NONNULL window,
+    SDL_Renderer* AMST_NONNULL renderer,
+    TTF_Font* AMST_NONNULL font
+);
 
 AMST_EXPORT
 void amstProcessEvents(void);

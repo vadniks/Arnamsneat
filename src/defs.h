@@ -11,9 +11,12 @@
 
 #include "../include/arnamsneatPrivate.h"
 #include <stddef.h>
+#include <stdint.h>
 
 #define defsAtomic _Atomic
 #define DEFS_USED(x) ((void) x)
+
+typedef uint8_t defsByte;
 
 void defsAssert(bool condition);
 bool defsSuccessful(int result);
