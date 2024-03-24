@@ -2,25 +2,29 @@
 #include "arnamsneat.h"
 #include "defs.h"
 
-static ATOMIC bool gInitialized = false;
+static defsAtomic bool gInitialized = false;
 
-bool arnamsneatInit(uint32_t flags) {
-    if (gInitialized) return false;
-
-    if (!defsSuccessful(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_TIMER | flags)))
-        return false;
-
-
+void arnamsneatInit(void) {
+    if (gInitialized) return;
     gInitialized = true;
-    return true;
 }
 
-bool arnamsneatProcessEvents(void) {
+ARNAMSNEAT_NONNULL() ARNAMSNEAT_RETURNS_NONNULL
+ArnamsneatRenderer* arnamsneatCreateRenderer(SDL_Window* window) {
+    DEFS_USED(window);
+    return (void*) 0x1;
+}
+
+void arnamsneatProcessEvents(void) {
     defsAssert(gInitialized);
-    return false;
 }
 
-bool arnamsneatQuit(void) {
-    if (!gInitialized) return false;
-    return true;
+ARNAMSNEAT_NONNULL()
+void arnamsneatDestroyRenderer(SDL_Window* window) {
+    DEFS_USED(window);
+}
+
+void arnamsneatQuit(void) {
+    if (!gInitialized) return;
+    gInitialized = false;
 }
