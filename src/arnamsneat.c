@@ -10,6 +10,7 @@ void amstInit(void) {
 }
 
 void amstSetSdlRendererHints(void) {
+    defsAssert(gInitialized);
     defsAssert(SDL_SetHint(SDL_HINT_RENDER_LINE_METHOD, "3"));
     defsAssert(SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengl"));
     defsAssert(SDL_SetHint(SDL_HINT_RENDER_OPENGL_SHADERS, "1"));
@@ -18,6 +19,7 @@ void amstSetSdlRendererHints(void) {
 }
 
 AmstRenderer* AMST_NULLABLE amstCreateRenderer(SDL_Window* AMST_NONNULL window) {
+    defsAssert(gInitialized);
     DEFS_USED(window);
     return (void*) 0x1;
 }
@@ -27,6 +29,7 @@ void amstProcessEvents(void) {
 }
 
 void amstDestroyRenderer(SDL_Window* AMST_NONNULL window) {
+    defsAssert(gInitialized);
     DEFS_USED(window);
 }
 

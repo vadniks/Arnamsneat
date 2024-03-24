@@ -10,7 +10,7 @@ add_compile_options("-Wextra")
 add_compile_options("-Wpedantic")
 add_compile_options("-O3")
 add_compile_options("-fvisibility=hidden")
-add_link_options("-s")
+#add_link_options("-s")
 
 add_compile_options("-Wno-nullability-extension")
 
