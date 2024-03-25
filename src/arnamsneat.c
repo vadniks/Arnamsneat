@@ -14,6 +14,7 @@
 struct _AmstContext {
     SDL_Window* AMST_NONNULL window;
     SDL_Renderer* AMST_NONNULL renderer;
+    SDL_GLContext* AMST_NONNULL glContext;
     int32_t windowWidth, windowHeight, rendererWidth, rendererHeight, currentWidth, currentHeight;
     float scaleX, scaleY, scaleFont;
     TTF_Font* AMST_NONNULL font;
@@ -63,8 +64,12 @@ AmstContext* AMST_NULLABLE amstContextCreate(
     AmstContext* context = defsMalloc(sizeof *context);
     context->window = window;
     context->renderer = renderer;
+    context->glContext = SDL_GL_CreateContext(window);
     context->font = font;
     updateSizes(context);
+
+    SDL_GL_SetSwapInterval(1);
+    SDL_Delay(50);
 
     return context;
 }
@@ -83,6 +88,7 @@ void amstDraw(AmstContext* AMST_NONNULL context) {
 
 void amstContextDestroy(AmstContext* AMST_NONNULL context) {
     defsAssert(gInitialized);
+    SDL_GL_DeleteContext(context->glContext);
     defsFree(context);
 }
 
