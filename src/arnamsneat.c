@@ -12,8 +12,8 @@
 #include <stdint.h>
 
 struct _AmstContext {
-    SDL_Window* window;
-    SDL_Renderer* renderer;
+    SDL_Window* AMST_NONNULL window;
+    SDL_Renderer* AMST_NONNULL renderer;
     int32_t windowWidth, windowHeight, rendererWidth, rendererHeight, currentWidth, currentHeight;
     float scaleX, scaleY, scaleFont;
     TTF_Font* AMST_NONNULL font;
