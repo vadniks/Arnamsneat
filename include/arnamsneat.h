@@ -10,6 +10,7 @@
 #pragma once
 
 #include "arnamsneatPrivate.h"
+#include <stdint.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
@@ -43,6 +44,9 @@ void amstProcessEvent(SDL_Event* AMST_NONNULL event);
 
 AMST_EXPORT
 void amstDraw(AmstContext* AMST_NONNULL context);
+
+AMST_EXPORT
+void amstGetCurrentSizes(AmstContext* AMST_NONNULL context, int32_t* AMST_NONNULL width, int32_t* AMST_NONNULL height);
 
 AMST_EXPORT
 void amstContextDestroy(AmstContext* AMST_NONNULL context);

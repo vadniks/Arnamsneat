@@ -9,7 +9,6 @@
 
 #include "arnamsneat.h"
 #include "defs.h"
-#include <stdint.h>
 #include <SDL2/SDL_opengl.h>
 
 struct _AmstContext {
@@ -75,15 +74,15 @@ AmstContext* AMST_NULLABLE amstContextCreate(
     return context;
 }
 
+void amstProcessEvent(SDL_Event* AMST_NONNULL event) {
+    defsAssert(gInitialized);
+    DEFS_USED(event);
+}
+
 static void clearColor(AmstContext* AMST_NONNULL context, float red, float green, float blue, float alpha) {
     glClearColor(red, green, blue, alpha);
     glClear(GL_COLOR_BUFFER_BIT);
     SDL_GL_SwapWindow(context->window);
-}
-
-void amstProcessEvent(SDL_Event* AMST_NONNULL event) {
-    defsAssert(gInitialized);
-    DEFS_USED(event);
 }
 
 void amstDraw(AmstContext* AMST_NONNULL context) {
@@ -92,6 +91,11 @@ void amstDraw(AmstContext* AMST_NONNULL context) {
     SDL_RenderClear(context->renderer);
     clearColor(context, 0.5f, 0.5f, 0.5f, 1.0f);
     SDL_RenderPresent(context->renderer);
+}
+
+void amstGetCurrentSizes(AmstContext* AMST_NONNULL context, int32_t* AMST_NONNULL width, int32_t* AMST_NONNULL height) {
+    *width = context->currentWidth;
+    *height = context->currentHeight;
 }
 
 void amstContextDestroy(AmstContext* AMST_NONNULL context) {
