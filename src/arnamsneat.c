@@ -9,17 +9,13 @@
 
 #include "arnamsneat.h"
 #include "defs.h"
-#include <GL/glew.h>
-//#include <SDL2/SDL_opengl.h>
 
 struct _AmstContext {
     SDL_Window* AMST_NONNULL window;
     SDL_Renderer* AMST_NONNULL renderer;
-    SDL_GLContext* AMST_NONNULL glContext;
     int32_t windowWidth, windowHeight, rendererWidth, rendererHeight, currentWidth, currentHeight;
     float scaleX, scaleY, scaleFont;
     TTF_Font* AMST_NONNULL font;
-    GLuint vertexBuffer;
 };
 
 static defsAtomic bool gInitialized = false;
@@ -27,14 +23,6 @@ static defsAtomic bool gInitialized = false;
 void amstInit(void) {
     if (gInitialized) return;
     gInitialized = true;
-}
-
-void amstSetGLAttributes(void) {
-    defsAssert(gInitialized);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 }
 
 void amstSetSdlRendererHints(void) {
@@ -67,32 +55,12 @@ AmstContext* AMST_NULLABLE amstContextCreate(
     AmstContext* context = defsMalloc(sizeof *context);
     context->window = window;
     context->renderer = renderer;
-    context->glContext = SDL_GL_CreateContext(window);
     context->font = font;
     updateSizes(context);
 
-    SDL_GL_SetSwapInterval(1);
     SDL_Delay(50);
 
     return context;
-}
-
-void amstPrepare(AmstContext* AMST_NONNULL context) {
-    defsAssert(gInitialized);
-
-    GLuint vertexArrayId;
-    glGenVertexArrays(1, &vertexArrayId);
-    glBindVertexArray(vertexArrayId);
-
-    const float vertexes[] = {
-        -1.0f, -1.0f, 0.0f,
-        1.0f, -1.0f, 0.0f,
-        0.0f,  1.0f, 0.0f,
-    };
-
-    glGenBuffers(1, &(context->vertexBuffer));
-    glBindBuffer(GL_ARRAY_BUFFER, context->vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertexes), vertexes, GL_STATIC_DRAW);
 }
 
 void amstProcessEvent(SDL_Event* AMST_NONNULL event) {
@@ -103,10 +71,7 @@ void amstProcessEvent(SDL_Event* AMST_NONNULL event) {
 void amstPrepareToDraw(AmstContext* AMST_NONNULL context) {
     defsAssert(gInitialized);
     SDL_GetWindowSizeInPixels(context->window, &(context->currentWidth), &(context->currentHeight));
-
     SDL_RenderClear(context->renderer);
-    glClear(GL_COLOR_BUFFER_BIT);
-    SDL_GL_SwapWindow(context->window);
 }
 
 void amstDrawAll(AmstContext* AMST_NONNULL context) {
@@ -122,7 +87,6 @@ void amstGetCurrentSizes(AmstContext* AMST_NONNULL context, int32_t* AMST_NONNUL
 
 void amstContextDestroy(AmstContext* AMST_NONNULL context) {
     defsAssert(gInitialized);
-    SDL_GL_DeleteContext(context->glContext);
     defsFree(context);
 }
 
@@ -145,11 +109,4 @@ void amstGetButtonMetrics(
 void amstDrawButton(AmstContext* AMST_NONNULL context, AmstButton* AMST_NONNULL button) {
     defsAssert(gInitialized);
 
-    glEnableVertexAttribArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, context->vertexBuffer);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
-
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-    glDisableVertexAttribArray(0);
 }

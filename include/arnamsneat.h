@@ -36,9 +36,6 @@ AMST_EXPORT
 void amstInit(void);
 
 AMST_EXPORT
-void amstSetGLAttributes(void);
-
-AMST_EXPORT
 void amstSetSdlRendererHints(void);
 
 AMST_EXPORT
@@ -47,9 +44,6 @@ AmstContext* AMST_NULLABLE amstContextCreate(
     SDL_Renderer* AMST_NONNULL renderer,
     TTF_Font* AMST_NONNULL font
 );
-
-AMST_EXPORT
-void amstPrepare(AmstContext* AMST_NONNULL context);
 
 AMST_EXPORT
 void amstProcessEvent(SDL_Event* AMST_NONNULL event);
