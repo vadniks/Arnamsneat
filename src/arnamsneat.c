@@ -19,6 +19,7 @@ struct _AmstContext {
     int32_t windowWidth, windowHeight, rendererWidth, rendererHeight, currentWidth, currentHeight;
     float scaleX, scaleY, scaleFont;
     TTF_Font* AMST_NONNULL font;
+    GLuint vertexBuffer;
 };
 
 static defsAtomic bool gInitialized = false;
@@ -76,7 +77,7 @@ AmstContext* AMST_NULLABLE amstContextCreate(
     return context;
 }
 
-void amstPrepare(AmstContext* AMST_NONNULL) {
+void amstPrepare(AmstContext* AMST_NONNULL context) {
     defsAssert(gInitialized);
 
     GLuint vertexArrayId;
@@ -89,9 +90,8 @@ void amstPrepare(AmstContext* AMST_NONNULL) {
         0.0f,  1.0f, 0.0f,
     };
 
-    GLuint vertexBuffer;
-    glGenBuffers(1, &vertexBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+    glGenBuffers(1, &(context->vertexBuffer));
+    glBindBuffer(GL_ARRAY_BUFFER, context->vertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertexes), vertexes, GL_STATIC_DRAW);
 }
 
@@ -145,4 +145,11 @@ void amstGetButtonMetrics(
 void amstDrawButton(AmstContext* AMST_NONNULL context, AmstButton* AMST_NONNULL button) {
     defsAssert(gInitialized);
 
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, context->vertexBuffer);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDisableVertexAttribArray(0);
 }

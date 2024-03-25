@@ -37,7 +37,8 @@ int main(void) {
         }
 
         amstPrepareToDraw(context);
-        //
+        AmstButton button;
+        amstDrawButton(context, &button);
         amstDrawAll(context);
 
         msecs += 10;
