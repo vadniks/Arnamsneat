@@ -39,9 +39,6 @@ AmstContext* AMST_NULLABLE amstContextCreate(
 );
 
 AMST_EXPORT
-void amstClearColor(AmstContext* AMST_NONNULL context, float red, float green, float blue, float alpha);
-
-AMST_EXPORT
 void amstProcessEvent(SDL_Event* AMST_NONNULL event);
 
 AMST_EXPORT
