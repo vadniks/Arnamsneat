@@ -25,7 +25,7 @@ struct AMST_EXPORT _AmstContext;
 typedef struct _AmstContext AmstContext;
 
 typedef struct {
-    const char16_t* text;
+    const char16_t* AMST_NONNULL text;
     int32_t textSize;
     int32_t x, y;
 } AmstButton;
@@ -52,7 +52,10 @@ AMST_EXPORT
 void amstProcessEvent(SDL_Event* AMST_NONNULL event);
 
 AMST_EXPORT
-void amstDraw(AmstContext* AMST_NONNULL context);
+void amstPrepareToDraw(AmstContext* AMST_NONNULL context);
+
+AMST_EXPORT
+void amstDrawAll(AmstContext* AMST_NONNULL context);
 
 AMST_EXPORT
 void amstGetCurrentSizes(AmstContext* AMST_NONNULL context, int32_t* AMST_NONNULL width, int32_t* AMST_NONNULL height);

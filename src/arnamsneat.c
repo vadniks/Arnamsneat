@@ -9,6 +9,7 @@
 
 #include "arnamsneat.h"
 #include "defs.h"
+#include <GL/glew.h>
 #include <SDL2/SDL_opengl.h>
 
 struct _AmstContext {
@@ -79,17 +80,15 @@ void amstProcessEvent(SDL_Event* AMST_NONNULL event) {
     DEFS_USED(event);
 }
 
-static void clearColor(AmstContext* AMST_NONNULL context, float red, float green, float blue, float alpha) {
-    glClearColor(red, green, blue, alpha);
+void amstPrepareToDraw(AmstContext* AMST_NONNULL context) {
+    SDL_GetWindowSizeInPixels(context->window, &(context->currentWidth), &(context->currentHeight));
+    SDL_RenderClear(context->renderer);
     glClear(GL_COLOR_BUFFER_BIT);
     SDL_GL_SwapWindow(context->window);
 }
 
-void amstDraw(AmstContext* AMST_NONNULL context) {
+void amstDrawAll(AmstContext* AMST_NONNULL context) {
     defsAssert(gInitialized);
-    SDL_GetWindowSizeInPixels(context->window, &(context->currentWidth), &(context->currentHeight));
-    SDL_RenderClear(context->renderer);
-    clearColor(context, 0.5f, 0.5f, 0.5f, 1.0f);
     SDL_RenderPresent(context->renderer);
 }
 
@@ -117,6 +116,16 @@ void amstGetButtonMetrics(
     int32_t* AMST_NONNULL width,
     int32_t* AMST_NONNULL height
 ) {
+    GLuint vertexArrayId;
+    glGenVertexArrays(1, &vertexArrayId);
+
+//
+//    const float vertexes[] = {
+//        -1.0f, -1.0f, 0.0f,
+//        1.0f, -1.0f, 0.0f,
+//        0.0f,  1.0f, 0.0f,
+//    };
+
 
 }
 
