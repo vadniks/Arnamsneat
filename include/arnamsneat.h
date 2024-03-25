@@ -11,6 +11,7 @@
 
 #include "arnamsneatPrivate.h"
 #include <stdint.h>
+#include <uchar.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
@@ -22,6 +23,14 @@
 
 struct AMST_EXPORT _AmstContext;
 typedef struct _AmstContext AmstContext;
+
+typedef struct {
+    const char16_t* text;
+    int32_t textSize;
+    int32_t x, y;
+} AmstButton;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 AMST_EXPORT
 void amstInit(void);
@@ -53,3 +62,16 @@ void amstContextDestroy(AmstContext* AMST_NONNULL context);
 
 AMST_EXPORT
 void amstQuit(void);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+AMST_EXPORT
+void amstGetButtonMetrics(
+    AmstContext* AMST_NONNULL context,
+    AmstButton* AMST_NONNULL button,
+    int32_t* AMST_NONNULL width,
+    int32_t* AMST_NONNULL height
+);
+
+AMST_EXPORT
+void amstDrawButton(AmstContext* AMST_NONNULL context, AmstButton* AMST_NONNULL button);

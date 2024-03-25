@@ -108,3 +108,18 @@ void amstQuit(void) {
     if (!gInitialized) return;
     gInitialized = false;
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void amstGetButtonMetrics(
+    AmstContext* AMST_NONNULL context,
+    AmstButton* AMST_NONNULL button,
+    int32_t* AMST_NONNULL width,
+    int32_t* AMST_NONNULL height
+) {
+
+}
+
+void amstDrawButton(AmstContext* AMST_NONNULL context, AmstButton* AMST_NONNULL button) {
+
+}
