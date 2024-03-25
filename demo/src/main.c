@@ -17,6 +17,7 @@ int main(void) {
         90 * scale,
         SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
     );
+    SDL_SetWindowMinimumSize(window, 160 * scale, 90 * scale);
 
     amstSetSdlRendererHints();
     SDL_Renderer* renderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);

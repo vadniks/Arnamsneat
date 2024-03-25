@@ -14,7 +14,7 @@
 struct _AmstContext {
     SDL_Window* window;
     SDL_Renderer* renderer;
-    int32_t windowWidth, windowHeight, rendererWidth, rendererHeight;
+    int32_t windowWidth, windowHeight, rendererWidth, rendererHeight, currentWidth, currentHeight;
     float scaleX, scaleY, scaleFont;
     TTF_Font* AMST_NONNULL font;
 };
@@ -35,6 +35,17 @@ void amstSetSdlRendererHints(void) {
     defsAssert(SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2"));
 }
 
+static void updateSizes(AmstContext* AMST_NONNULL context) {
+    SDL_GetWindowSize(context->window, &(context->windowWidth), &(context->windowHeight));
+    SDL_GetRendererOutputSize(context->renderer, &(context->rendererWidth), &(context->rendererHeight));
+
+    context->scaleX = (float) context->rendererWidth / (float) context->windowWidth;
+    context->scaleY = (float) context->rendererHeight / (float) context->windowHeight;
+
+    SDL_RenderSetScale(context->renderer, context->scaleX, context->scaleY);
+    context->scaleFont = context->scaleY;
+}
+
 AmstContext* AMST_NULLABLE amstContextCreate(
     SDL_Window* AMST_NONNULL window,
     SDL_Renderer* AMST_NONNULL renderer,
@@ -45,20 +56,8 @@ AmstContext* AMST_NULLABLE amstContextCreate(
     AmstContext* context = defsMalloc(sizeof *context);
     context->window = window;
     context->renderer = renderer;
-    SDL_GetWindowSize(window, &(context->windowWidth), &(context->windowHeight));
-    SDL_GetRendererOutputSize(renderer, &(context->rendererWidth), &(context->rendererHeight));
-    context->scaleX = (float) context->rendererWidth / (float) context->windowWidth;
-    context->scaleY = (float) context->rendererHeight / (float) context->windowHeight;
-
-    SDL_SetWindowMinimumSize(
-        window,
-        (int) ((float) context->windowWidth * context->scaleX),
-        (int) ((float) context->windowHeight * context->scaleY)
-    );
-    SDL_RenderSetScale(renderer, context->scaleX, context->scaleY);
-
-    context->scaleFont = context->scaleY;
     context->font = font;
+    updateSizes(context);
 
     return context;
 }
@@ -70,6 +69,7 @@ void amstProcessEvent(SDL_Event* AMST_NONNULL event) {
 
 void amstDraw(AmstContext* AMST_NONNULL context) {
     defsAssert(gInitialized);
+    SDL_GetWindowSizeInPixels(context->window, &(context->currentWidth), &(context->currentHeight));
     SDL_RenderClear(context->renderer);
     SDL_RenderPresent(context->renderer);
 }
