@@ -26,6 +26,9 @@ AMST_EXPORT
 void amstInit(void);
 
 AMST_EXPORT
+void amstSetGLAttributes(void);
+
+AMST_EXPORT
 void amstSetSdlRendererHints(void);
 
 AMST_EXPORT

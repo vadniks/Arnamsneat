@@ -9,13 +9,14 @@ int main(void) {
 
     const int scale = 5;
 
+    amstSetGLAttributes();
     SDL_Window* window = SDL_CreateWindow(
         "Title",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
         160 * scale,
         90 * scale,
-        SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
+        SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL
     );
     SDL_SetWindowMinimumSize(window, 160 * scale, 90 * scale);
 
