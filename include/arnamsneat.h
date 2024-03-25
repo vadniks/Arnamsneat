@@ -49,6 +49,9 @@ AmstContext* AMST_NULLABLE amstContextCreate(
 );
 
 AMST_EXPORT
+void amstPrepare(AmstContext* AMST_NONNULL context);
+
+AMST_EXPORT
 void amstProcessEvent(SDL_Event* AMST_NONNULL event);
 
 AMST_EXPORT

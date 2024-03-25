@@ -10,7 +10,7 @@
 #include "arnamsneat.h"
 #include "defs.h"
 #include <GL/glew.h>
-#include <SDL2/SDL_opengl.h>
+//#include <SDL2/SDL_opengl.h>
 
 struct _AmstContext {
     SDL_Window* AMST_NONNULL window;
@@ -29,6 +29,7 @@ void amstInit(void) {
 }
 
 void amstSetGLAttributes(void) {
+    defsAssert(gInitialized);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
@@ -75,13 +76,34 @@ AmstContext* AMST_NULLABLE amstContextCreate(
     return context;
 }
 
+void amstPrepare(AmstContext* AMST_NONNULL) {
+    defsAssert(gInitialized);
+
+    GLuint vertexArrayId;
+    glGenVertexArrays(1, &vertexArrayId);
+    glBindVertexArray(vertexArrayId);
+
+    const float vertexes[] = {
+        -1.0f, -1.0f, 0.0f,
+        1.0f, -1.0f, 0.0f,
+        0.0f,  1.0f, 0.0f,
+    };
+
+    GLuint vertexBuffer;
+    glGenBuffers(1, &vertexBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertexes), vertexes, GL_STATIC_DRAW);
+}
+
 void amstProcessEvent(SDL_Event* AMST_NONNULL event) {
     defsAssert(gInitialized);
     DEFS_USED(event);
 }
 
 void amstPrepareToDraw(AmstContext* AMST_NONNULL context) {
+    defsAssert(gInitialized);
     SDL_GetWindowSizeInPixels(context->window, &(context->currentWidth), &(context->currentHeight));
+
     SDL_RenderClear(context->renderer);
     glClear(GL_COLOR_BUFFER_BIT);
     SDL_GL_SwapWindow(context->window);
@@ -93,6 +115,7 @@ void amstDrawAll(AmstContext* AMST_NONNULL context) {
 }
 
 void amstGetCurrentSizes(AmstContext* AMST_NONNULL context, int32_t* AMST_NONNULL width, int32_t* AMST_NONNULL height) {
+    defsAssert(gInitialized);
     *width = context->currentWidth;
     *height = context->currentHeight;
 }
@@ -116,19 +139,10 @@ void amstGetButtonMetrics(
     int32_t* AMST_NONNULL width,
     int32_t* AMST_NONNULL height
 ) {
-    GLuint vertexArrayId;
-    glGenVertexArrays(1, &vertexArrayId);
-
-//
-//    const float vertexes[] = {
-//        -1.0f, -1.0f, 0.0f,
-//        1.0f, -1.0f, 0.0f,
-//        0.0f,  1.0f, 0.0f,
-//    };
-
-
+    defsAssert(gInitialized);
 }
 
 void amstDrawButton(AmstContext* AMST_NONNULL context, AmstButton* AMST_NONNULL button) {
+    defsAssert(gInitialized);
 
 }
