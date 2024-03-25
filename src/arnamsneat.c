@@ -61,8 +61,6 @@ AmstContext* AMST_NULLABLE amstContextCreate(
     context->font = font;
     updateSizes(context);
 
-    SDL_Delay(50);
-
     return context;
 }
 
@@ -151,4 +149,6 @@ void amstDrawButton(AmstContext* AMST_NONNULL context, AmstButton* AMST_NONNULL 
         &((SDL_Rect) {button->x, button->y, textWidth, textHeight})
     );
     SDL_DestroyTexture(texture);
+
+
 }
