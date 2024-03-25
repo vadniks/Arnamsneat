@@ -14,8 +14,11 @@ struct _AmstContext {
     SDL_Window* AMST_NONNULL window;
     SDL_Renderer* AMST_NONNULL renderer;
     int32_t windowWidth, windowHeight, rendererWidth, rendererHeight, currentWidth, currentHeight;
-    float scaleX, scaleY, scaleFont;
+    float scaleX, scaleY;
+    int32_t fontSize;
     TTF_Font* AMST_NONNULL font;
+    int32_t mouseX, mouseY;
+    bool mouseDown;
 };
 
 static defsAtomic bool gInitialized = false;
@@ -42,7 +45,7 @@ static void updateSizes(AmstContext* AMST_NONNULL context) {
     context->scaleY = (float) context->rendererHeight / (float) context->windowHeight;
 
     SDL_RenderSetScale(context->renderer, context->scaleX, context->scaleY);
-    context->scaleFont = context->scaleY;
+    context->fontSize = (int32_t) context->scaleY;
 }
 
 AmstContext* AMST_NULLABLE amstContextCreate(
@@ -106,7 +109,39 @@ void amstGetButtonMetrics(
     defsAssert(gInitialized);
 }
 
+static SDL_Texture* AMST_NONNULL renderText(
+    AmstContext* AMST_NONNULL context,
+    const char* AMST_NONNULL text,
+    int32_t textSize,
+    SDL_Color color,
+    int32_t* AMST_NONNULL width,
+    int32_t* AMST_NONNULL height
+) {
+    char xText[textSize];
+    SDL_memset(xText, 0, textSize);
+    SDL_memcpy(xText, text, textSize);
+
+    SDL_Surface* surface = TTF_RenderText_Solid(context->font, xText, color);
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(context->renderer, surface);
+    *width = surface->w;
+    *height = surface->h;
+    SDL_FreeSurface(surface);
+
+    return texture;
+}
+
 void amstDrawButton(AmstContext* AMST_NONNULL context, AmstButton* AMST_NONNULL button) {
     defsAssert(gInitialized);
 
+    int32_t textWidth, textHeight;
+    SDL_Texture* texture = renderText(
+        context,
+        button->text,
+        button->textSize,
+        (SDL_Color) {255, 255, 255, 255},
+        &textWidth,
+        &textHeight
+    );
+
+    SDL_DestroyTexture(texture);
 }
