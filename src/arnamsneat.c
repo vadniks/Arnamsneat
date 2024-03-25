@@ -74,6 +74,7 @@ void amstProcessEvent(SDL_Event* AMST_NONNULL event) {
 void amstPrepareToDraw(AmstContext* AMST_NONNULL context) {
     defsAssert(gInitialized);
     SDL_GetWindowSizeInPixels(context->window, &(context->currentWidth), &(context->currentHeight));
+    SDL_SetRenderDrawColor(context->renderer, 50, 50, 50, 255);
     SDL_RenderClear(context->renderer);
 }
 
@@ -117,8 +118,8 @@ static SDL_Texture* AMST_NONNULL renderText(
     int32_t* AMST_NONNULL width,
     int32_t* AMST_NONNULL height
 ) {
-    char xText[textSize];
-    SDL_memset(xText, 0, textSize);
+    char xText[textSize + 1];
+    SDL_memset(xText, 0, textSize + 1);
     SDL_memcpy(xText, text, textSize);
 
     SDL_Surface* surface = TTF_RenderText_Solid(context->font, xText, color);
@@ -143,5 +144,11 @@ void amstDrawButton(AmstContext* AMST_NONNULL context, AmstButton* AMST_NONNULL 
         &textHeight
     );
 
+    SDL_RenderCopy(
+        context->renderer,
+        texture,
+        nullptr,
+        &((SDL_Rect) {button->x, button->y, textWidth, textHeight})
+    );
     SDL_DestroyTexture(texture);
 }

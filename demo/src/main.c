@@ -2,9 +2,13 @@
 #include <stdlib.h>
 #include <arnamsneat.h>
 
+static void buttonClicked(void) { SDL_Log("button clicked"); }
+
 int main(void) {
     amstInit();
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_TIMER) != 0)
+        abort();
+    if (TTF_Init() != 0)
         abort();
 
     const int scale = 5;
@@ -22,7 +26,7 @@ int main(void) {
     amstSetSdlRendererHints();
     SDL_Renderer* renderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
-    TTF_Font* font = TTF_OpenFont("res/RobotoMono.ttf", 1);
+    TTF_Font* font = TTF_OpenFont("res/RobotoMono.ttf", 24);
 
     AmstContext* context = amstContextCreate(window, renderer, font);
 
@@ -35,8 +39,7 @@ int main(void) {
         }
 
         amstPrepareToDraw(context);
-        AmstButton button;
-        amstDrawButton(context, &button);
+        amstDrawButton(context, &((AmstButton) {"Hello World!", 12, 10, 10, &buttonClicked}));
         amstDrawAll(context);
 
         msecs += 10;
@@ -49,6 +52,7 @@ int main(void) {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
 
+    TTF_Quit();
     SDL_Quit();
     amstQuit();
 

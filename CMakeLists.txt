@@ -17,7 +17,7 @@ add_compile_options("-Wno-nullability-extension")
 file(GLOB SOURCES CONFIGURE_DEPENDS include/*.h src/*.c src/*.h)
 add_library(${PROJECT_NAME} SHARED ${SOURCES} ${INCLUDES})
 
-target_link_libraries(${PROJECT_NAME} SDL2 SDL2_image SDL2_ttf GL GLEW m)
+target_link_libraries(${PROJECT_NAME} SDL2 SDL2_ttf SDL2_image)
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
