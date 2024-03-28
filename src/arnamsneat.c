@@ -72,6 +72,11 @@ void amstProcessEvent(AmstContext* AMST_NONNULL context, SDL_Event* AMST_NONNULL
         context->mouseY = event->motion.y;
     }
 
+    if (event->type == SDL_MOUSEBUTTONDOWN)
+        context->mouseDown = true;
+    if (event->type == SDL_MOUSEBUTTONUP)
+        context->mouseDown = false;
+
     DEFS_USED(event);
 }
 
@@ -160,4 +165,9 @@ void amstDrawButton(AmstContext* AMST_NONNULL context, AmstButton* AMST_NONNULL 
     SDL_SetRenderDrawColor(context->renderer, color.r, color.g, color.b, color.a);
     SDL_RenderDrawRect(context->renderer, &((SDL_Rect) {button->x, button->y, textWidth + 5, textHeight + 5}));
     SDL_SetRenderDrawColor(context->renderer, r, g, b, a);
+
+    if (context->mouseDown) {
+        context->mouseDown = false;
+        button->clickHandler();
+    }
 }
