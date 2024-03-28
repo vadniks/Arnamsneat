@@ -99,31 +99,29 @@ void amstQuit(void) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void amstGetButtonMetrics(
+void amstGetTextMetrics(
     AmstContext* AMST_NONNULL context,
-    AmstButton* AMST_NONNULL button,
+    const char* AMST_NONNULL text,
     int32_t* AMST_NONNULL width,
     int32_t* AMST_NONNULL height
 ) {
     defsAssert(gInitialized);
+    TTF_SizeUTF8(context->font, text, width, height);
 }
 
 static SDL_Texture* AMST_NONNULL renderText(
     AmstContext* AMST_NONNULL context,
     const char* AMST_NONNULL text,
-    int32_t textSize,
     SDL_Color color,
-    int32_t* AMST_NONNULL width,
-    int32_t* AMST_NONNULL height
+    int32_t* AMST_NULLABLE width,
+    int32_t* AMST_NULLABLE height
 ) {
-    char xText[textSize + 1];
-    SDL_memset(xText, 0, textSize + 1);
-    SDL_memcpy(xText, text, textSize);
+    SDL_Surface* surface = TTF_RenderUTF8_Solid(context->font, text, color);
 
-    SDL_Surface* surface = TTF_RenderText_Solid(context->font, xText, color);
+    if (width != nullptr) *width = surface->w;
+    if (height != nullptr) *height = surface->h;
+
     SDL_Texture* texture = SDL_CreateTextureFromSurface(context->renderer, surface);
-    *width = surface->w;
-    *height = surface->h;
     SDL_FreeSurface(surface);
 
     return texture;
@@ -133,22 +131,27 @@ void amstDrawButton(AmstContext* AMST_NONNULL context, AmstButton* AMST_NONNULL 
     defsAssert(gInitialized);
 
     int32_t textWidth, textHeight;
-    SDL_Texture* texture = renderText(
-        context,
-        button->text,
-        button->textSize,
-        (SDL_Color) {255, 255, 255, 255},
-        &textWidth,
-        &textHeight
-    );
+    amstGetTextMetrics(context, button->text, &textWidth, &textHeight);
+
+    const bool mouseHovered =
+        context->mouseX >= button->x && context->mouseX <= textWidth + 5 &&
+        context->mouseY >= button->y && context->mouseY <= textHeight + 5;
+
+    SDL_Color color = mouseHovered ? ((SDL_Color) {127, 127, 127, 127}) : ((SDL_Color) {255, 255, 255, 255});
+
+    SDL_Texture* texture = renderText(context, button->text, color, nullptr, nullptr);
 
     SDL_RenderCopy(
         context->renderer,
         texture,
         nullptr,
-        &((SDL_Rect) {button->x, button->y, textWidth, textHeight})
+        &((SDL_Rect) {button->x + 5, button->y + 5, textWidth, textHeight})
     );
     SDL_DestroyTexture(texture);
 
-
+    uint8_t r, g, b, a;
+    SDL_GetRenderDrawColor(context->renderer, &r, &g, &b, &a);
+    SDL_SetRenderDrawColor(context->renderer, color.r, color.g, color.b, color.a);
+    SDL_RenderDrawRect(context->renderer, &((SDL_Rect) {button->x, button->y, textWidth + 5, textHeight + 5}));
+    SDL_SetRenderDrawColor(context->renderer, r, g, b, a);
 }

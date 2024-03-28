@@ -39,7 +39,7 @@ int main(void) {
         }
 
         amstPrepareToDraw(context);
-        amstDrawButton(context, &((AmstButton) {"Hello World!", 12, 10, 10, &buttonClicked}));
+        amstDrawButton(context, &((AmstButton) {"Hello World!", 10, 10, &buttonClicked}));
         amstDrawAll(context);
 
         msecs += 10;

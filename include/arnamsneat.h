@@ -24,8 +24,7 @@ struct AMST_EXPORT _AmstContext;
 typedef struct _AmstContext AmstContext;
 
 typedef struct {
-    const char* AMST_NONNULL text;
-    int32_t textSize;
+    const char* AMST_NONNULL text; // utf-8
     int32_t x, y;
     void (* AMST_NONNULL clickHandler)(void);
 } AmstButton;
@@ -66,9 +65,9 @@ void amstQuit(void);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 AMST_EXPORT
-void amstGetButtonMetrics(
+void amstGetTextMetrics(
     AmstContext* AMST_NONNULL context,
-    AmstButton* AMST_NONNULL button,
+    const char* AMST_NONNULL text, // utf-8
     int32_t* AMST_NONNULL width,
     int32_t* AMST_NONNULL height
 );
