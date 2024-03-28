@@ -35,7 +35,7 @@ int main(void) {
     while (msecs < 5000) {
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) goto end;
-            amstProcessEvent(&event);
+            amstProcessEvent(context, &event);
         }
 
         amstPrepareToDraw(context);

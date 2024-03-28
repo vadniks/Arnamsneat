@@ -64,8 +64,14 @@ AmstContext* AMST_NULLABLE amstContextCreate(
     return context;
 }
 
-void amstProcessEvent(SDL_Event* AMST_NONNULL event) {
+void amstProcessEvent(AmstContext* AMST_NONNULL context, SDL_Event* AMST_NONNULL event) {
     defsAssert(gInitialized);
+
+    if (event->type == SDL_MOUSEMOTION) {
+        context->mouseX = event->motion.x;
+        context->mouseY = event->motion.y;
+    }
+
     DEFS_USED(event);
 }
 
