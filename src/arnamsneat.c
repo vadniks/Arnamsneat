@@ -18,7 +18,7 @@ struct _AmstContext {
     int32_t fontSize;
     TTF_Font* AMST_NONNULL font;
     int32_t mouseX, mouseY;
-    bool mouseDown;
+    defsAtomic bool mouseDown;
 };
 
 static defsAtomic bool gInitialized = false;
@@ -130,7 +130,7 @@ static SDL_Texture* AMST_NONNULL renderText(
     int32_t* AMST_NULLABLE width,
     int32_t* AMST_NULLABLE height
 ) {
-    SDL_Surface* surface = TTF_RenderUTF8_Solid(context->font, text, color);
+    SDL_Surface* surface = TTF_RenderUTF8_Blended(context->font, text, color);
 
     if (width != nullptr) *width = surface->w;
     if (height != nullptr) *height = surface->h;
