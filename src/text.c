@@ -14,20 +14,24 @@ void amstGetTextMetrics(
     TTF_SizeUTF8(context->font, text, width, height);
 }
 
-SDL_Texture* AMST_NONNULL renderText(
+void amstText(
     AmstContext* AMST_NONNULL context,
     const char* AMST_NONNULL text,
     SDL_Color color,
-    int32_t* AMST_NULLABLE width,
-    int32_t* AMST_NULLABLE height
+    int32_t x,
+    int32_t y
 ) {
     SDL_Surface* surface = TTF_RenderUTF8_Blended(context->font, text, color);
-
-    if (width != nullptr) *width = surface->w;
-    if (height != nullptr) *height = surface->h;
-
     SDL_Texture* texture = SDL_CreateTextureFromSurface(context->renderer, surface);
-    SDL_FreeSurface(surface);
 
-    return texture;
+    SDL_RenderCopy(
+        context->renderer,
+        texture,
+        nullptr,
+        &((SDL_Rect) {x, y, surface->w, surface->h})
+    );
+    SDL_DestroyTexture(texture);
+
+    SDL_FreeSurface(surface);
+    SDL_DestroyTexture(texture);
 }

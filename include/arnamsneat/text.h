@@ -11,10 +11,11 @@ void amstGetTextMetrics(
     int32_t* AMST_NONNULL height
 );
 
-SDL_Texture* AMST_NONNULL renderText(
+AMST_EXPORT
+void amstText(
     AmstContext* AMST_NONNULL context,
     const char* AMST_NONNULL text,
     SDL_Color color,
-    int32_t* AMST_NULLABLE width,
-    int32_t* AMST_NULLABLE height
+    int32_t x,
+    int32_t y
 );

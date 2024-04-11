@@ -3,12 +3,6 @@
 
 #include <arnamsneat/arnamsneat.h>
 
-typedef struct {
-    const char* AMST_NONNULL text; // utf-8
-    int32_t x, y;
-    void (* AMST_NONNULL clickHandler)(void);
-} AmstButton;
-
 AMST_EXPORT
 void amstGetButtonMetrics(
     int32_t textWidth,
@@ -18,4 +12,10 @@ void amstGetButtonMetrics(
 );
 
 AMST_EXPORT
-void amstDrawButton(AmstContext* AMST_NONNULL context, AmstButton* AMST_NONNULL button);
+void amstButton(
+    AmstContext* AMST_NONNULL context,
+    const char* AMST_NONNULL text,
+    int32_t x,
+    int32_t y,
+    void (* AMST_NONNULL clickHandler)(void)
+);
