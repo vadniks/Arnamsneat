@@ -8,6 +8,7 @@
 */
 
 #include <arnamsneat/text.h>
+#include <arnamsneat/image.h>
 #include "defs.h"
 #include "context.h"
 #include "internal.h"
@@ -30,20 +31,12 @@ void amstText(
     int32_t y
 ) {
     defsAssert(gInitialized);
-
     SDL_Surface* surface = TTF_RenderUTF8_Blended(context->font, text, color);
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(context->renderer, surface);
 
-    SDL_RenderCopy(
-        context->renderer,
-        texture,
-        nullptr,
-        &((SDL_Rect) {x, y, surface->w, surface->h})
-    );
+    amstImage(context, surface, x, y);
 
     context->lastWidth = surface->w;
     context->lastHeight = surface->h;
 
     SDL_FreeSurface(surface);
-    SDL_DestroyTexture(texture);
 }

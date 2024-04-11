@@ -11,4 +11,10 @@
 
 #include <arnamsneat/arnamsneat.h>
 
-
+AMST_EXPORT
+void amstImage(
+    AmstContext* AMST_NONNULL context,
+    SDL_Surface* AMST_NONNULL surface,
+    int32_t x,
+    int32_t y
+);
