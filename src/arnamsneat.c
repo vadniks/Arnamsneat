@@ -154,13 +154,14 @@ void amstGetButtonMetrics(
 
 void amstDrawButton(AmstContext* AMST_NONNULL context, AmstButton* AMST_NONNULL button) {
     defsAssert(gInitialized);
+    defsAssert(button->x >= 5 && button->y >= 5);
 
     int32_t textWidth, textHeight;
     amstGetTextMetrics(context, button->text, &textWidth, &textHeight);
 
     const bool mouseHovered =
-        context->mouseX >= button->x - 5 && context->mouseX <= textWidth + 10 &&
-        context->mouseY >= button->y - 5 && context->mouseY <= textHeight + 10;
+        context->mouseX >= button->x - 5 && context->mouseX <= button->x + textWidth + 10 &&
+        context->mouseY >= button->y - 5 && context->mouseY <= button->y + textHeight + 10;
 
     SDL_Color color = mouseHovered ? ((SDL_Color) {127, 127, 127, 127}) : ((SDL_Color) {255, 255, 255, 255});
 

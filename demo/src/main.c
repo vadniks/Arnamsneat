@@ -42,7 +42,7 @@ int main(void) {
 //        int32_t width, height;
 //        amstGetTextMetrics(context, "A", &width, &height);
         amstDrawButton(context, &((AmstButton) {"A", 10, 10, &buttonAClicked}));
-//        amstDrawButton(context, &((AmstButton) {"B", 10 + 10 + width, 10, &buttonBClicked}));
+        amstDrawButton(context, &((AmstButton) {"B", 40, 10, &buttonBClicked}));
         amstDrawAll(context);
     }
     end:
