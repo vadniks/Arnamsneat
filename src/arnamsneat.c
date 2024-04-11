@@ -18,7 +18,7 @@ struct _AmstContext {
     int32_t fontSize;
     TTF_Font* AMST_NONNULL font;
     int32_t mouseX, mouseY;
-    defsAtomic bool mouseDown;
+    bool mouseDown;
 };
 
 static defsAtomic bool gInitialized = false;
