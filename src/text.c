@@ -29,6 +29,8 @@ void amstText(
     int32_t x,
     int32_t y
 ) {
+    defsAssert(gInitialized);
+
     SDL_Surface* surface = TTF_RenderUTF8_Blended(context->font, text, color);
     SDL_Texture* texture = SDL_CreateTextureFromSurface(context->renderer, surface);
 
