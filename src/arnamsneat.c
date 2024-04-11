@@ -180,7 +180,7 @@ void amstDrawButton(AmstContext* AMST_NONNULL context, AmstButton* AMST_NONNULL 
     SDL_RenderDrawRect(context->renderer, &((SDL_Rect) {button->x - 5, button->y - 5, textWidth + 10, textHeight + 10}));
     SDL_SetRenderDrawColor(context->renderer, r, g, b, a);
 
-    if (context->mouseDown) {
+    if (mouseHovered && context->mouseDown) {
         context->mouseDown = false;
         button->clickHandler();
     }
