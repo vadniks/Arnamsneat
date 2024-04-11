@@ -160,7 +160,14 @@ void amstDrawButton(AmstContext* AMST_NONNULL context, AmstButton* AMST_NONNULL 
         context->mouseX >= button->x - 5 && context->mouseX <= button->x + textWidth + 10 &&
         context->mouseY >= button->y - 5 && context->mouseY <= button->y + textHeight + 10;
 
-    SDL_Color color = mouseHovered ? ((SDL_Color) {127, 127, 127, 127}) : ((SDL_Color) {255, 255, 255, 255});
+    const bool mouseClicked = mouseHovered && context->mouseDown;
+
+    SDL_Color color =
+        mouseClicked
+            ? ((SDL_Color) {50, 50, 50, 50})
+            : mouseHovered
+                ? ((SDL_Color) {127, 127, 127, 127})
+                : ((SDL_Color) {255, 255, 255, 255});
 
     SDL_Texture* texture = renderText(context, button->text, color, nullptr, nullptr);
 
@@ -178,7 +185,7 @@ void amstDrawButton(AmstContext* AMST_NONNULL context, AmstButton* AMST_NONNULL 
     SDL_RenderDrawRect(context->renderer, &((SDL_Rect) {button->x - 5, button->y - 5, textWidth + 10, textHeight + 10}));
     SDL_SetRenderDrawColor(context->renderer, r, g, b, a);
 
-    if (mouseHovered && context->mouseDown) {
+    if (mouseClicked) {
         context->mouseDown = false;
         button->clickHandler();
     }
