@@ -15,7 +15,6 @@ struct _AmstContext {
     SDL_Renderer* AMST_NONNULL renderer;
     int32_t windowWidth, windowHeight, rendererWidth, rendererHeight, currentWidth, currentHeight;
     float scaleX, scaleY;
-    int32_t fontSize;
     TTF_Font* AMST_NONNULL font;
     int32_t mouseX, mouseY;
     bool mouseDown;
@@ -45,7 +44,6 @@ static void updateSizes(AmstContext* AMST_NONNULL context) {
     context->scaleY = (float) context->rendererHeight / (float) context->windowHeight;
 
     SDL_RenderSetScale(context->renderer, context->scaleX, context->scaleY);
-    context->fontSize = (int32_t) context->scaleY;
 }
 
 AmstContext* AMST_NULLABLE amstContextCreate(
