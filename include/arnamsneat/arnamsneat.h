@@ -9,6 +9,16 @@
 
 #pragma once
 
+#include <stdint.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+
+#if !defined(__GNUC__) || !defined(__STDC__) || __STDC_VERSION__ < 202000L // C23
+#   error
+#endif
+
+#define AMST_EXPORT [[gnu::visibility("default")]]
+
 #ifdef __clang__
 #   define AMST_NULLABLE _Nullable
 #   define AMST_NONNULL _Nonnull
@@ -16,3 +26,6 @@
 #   define AMST_NULLABLE
 #   define AMST_NONNULL
 #endif
+
+struct AMST_EXPORT _AmstContext;
+typedef struct _AmstContext AmstContext;

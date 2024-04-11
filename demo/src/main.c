@@ -1,6 +1,8 @@
 
 #include <stdlib.h>
-#include <arnamsneat.h>
+#include <arnamsneat/arnamsneat.h>
+#include <arnamsneat/core.h>
+#include <arnamsneat/button.h>
 
 static void buttonAClicked(void) { SDL_Log("button a clicked"); }
 static void buttonBClicked(void) { SDL_Log("button b clicked"); }

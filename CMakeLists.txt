@@ -14,14 +14,13 @@ add_compile_options("-fvisibility=hidden")
 
 add_compile_options("-Wno-nullability-extension")
 
-file(GLOB SOURCES CONFIGURE_DEPENDS include/*.h src/*.c src/*.h)
+file(GLOB SOURCES CONFIGURE_DEPENDS include/arnamsneat/*.h src/*.c src/*.h)
 add_library(${PROJECT_NAME} SHARED ${SOURCES} ${INCLUDES})
 
 target_link_libraries(${PROJECT_NAME} SDL2 SDL2_ttf SDL2_image)
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
-set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER include/arnamsneat.h)
 
 set(EXE_DEMO exeDemo)
 add_subdirectory(demo)

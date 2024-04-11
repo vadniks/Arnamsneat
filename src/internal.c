@@ -1,0 +1,2 @@
+
+bool gInitialized = false;

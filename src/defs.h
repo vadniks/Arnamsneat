@@ -9,7 +9,7 @@
 
 #pragma once
 
-#include "../include/arnamsneatPrivate.h"
+#include <arnamsneat/arnamsneat.h>
 #include <stddef.h>
 #include <stdint.h>
 
