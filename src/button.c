@@ -35,10 +35,11 @@ void amstButton(
 
     int32_t textWidth, textHeight;
     amstGetTextMetrics(context, text, &textWidth, &textHeight);
+    const int32_t width = textWidth + 10, height = textHeight + 10;
 
     const bool mouseHovered =
-        context->mouseX >= x && context->mouseX <= x + textWidth + 10 &&
-        context->mouseY >= y && context->mouseY <= y + textHeight + 10;
+        context->mouseX >= x && context->mouseX <= x + width &&
+        context->mouseY >= y && context->mouseY <= y + height;
 
     const bool mouseClicked = mouseHovered && context->mouseDown;
 
@@ -54,8 +55,11 @@ void amstButton(
     uint8_t r, g, b, a;
     SDL_GetRenderDrawColor(context->renderer, &r, &g, &b, &a);
     SDL_SetRenderDrawColor(context->renderer, color.r, color.g, color.b, color.a);
-    SDL_RenderDrawRect(context->renderer, &((SDL_Rect) {x, y, textWidth + 10, textHeight + 10}));
+    SDL_RenderDrawRect(context->renderer, &((SDL_Rect) {x, y, width, height}));
     SDL_SetRenderDrawColor(context->renderer, r, g, b, a);
+
+    context->lastWidth = width;
+    context->lastHeight = height;
 
     if (mouseClicked) {
         context->mouseDown = false;

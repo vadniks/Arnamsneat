@@ -38,7 +38,9 @@ void amstText(
         nullptr,
         &((SDL_Rect) {x, y, surface->w, surface->h})
     );
-    SDL_DestroyTexture(texture);
+
+    context->lastWidth = surface->w;
+    context->lastHeight = surface->h;
 
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);

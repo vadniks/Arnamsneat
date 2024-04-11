@@ -19,4 +19,6 @@ struct _AmstContext {
     TTF_Font* AMST_NONNULL font;
     int32_t mouseX, mouseY;
     bool mouseDown;
+    int32_t lastWidth;
+    int32_t lastHeight;
 };

@@ -3,6 +3,7 @@
 #include <arnamsneat/arnamsneat.h>
 #include <arnamsneat/core.h>
 #include <arnamsneat/button.h>
+#include <arnamsneat/text.h>
 
 static void buttonAClicked(void) { SDL_Log("button a clicked"); }
 static void buttonBClicked(void) { SDL_Log("button b clicked"); }
@@ -41,10 +42,10 @@ int main(void) {
         }
 
         amstPrepareToDraw(context);
-//        int32_t width, height;
-//        amstGetTextMetrics(context, "A", &width, &height);
+        int32_t width, height;
         amstButton(context, "A", 10, 10, &buttonAClicked);
-        amstButton(context, "B", 40, 10, &buttonBClicked);
+        amstGetLastSizes(context, &width, &height);
+        amstButton(context, "B", 10 + width + 5, 10, &buttonBClicked);
         amstDrawAll(context);
     }
     end:
