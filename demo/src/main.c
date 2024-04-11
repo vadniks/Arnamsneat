@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <arnamsneat.h>
 
-static void buttonClicked(void) { SDL_Log("button clicked"); }
+static void buttonAClicked(void) { SDL_Log("button a clicked"); }
+static void buttonBClicked(void) { SDL_Log("button b clicked"); }
 
 int main(void) {
     amstInit();
@@ -30,20 +31,19 @@ int main(void) {
 
     AmstContext* context = amstContextCreate(window, renderer, font);
 
-    int msecs = 0;
     SDL_Event event;
-    while (msecs < 5000) {
+    while (true) {
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) goto end;
             amstProcessEvent(context, &event);
         }
 
         amstPrepareToDraw(context);
-        amstDrawButton(context, &((AmstButton) {"Hello World!", 10, 10, &buttonClicked}));
+//        int32_t width, height;
+//        amstGetTextMetrics(context, "A", &width, &height);
+        amstDrawButton(context, &((AmstButton) {"A", 10, 10, &buttonAClicked}));
+//        amstDrawButton(context, &((AmstButton) {"B", 10 + 10 + width, 10, &buttonBClicked}));
         amstDrawAll(context);
-
-        msecs += 10;
-        SDL_Delay(10);
     }
     end:
 

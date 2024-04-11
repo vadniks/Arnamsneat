@@ -141,6 +141,17 @@ static SDL_Texture* AMST_NONNULL renderText(
     return texture;
 }
 
+void amstGetButtonMetrics(
+    AmstContext* AMST_NONNULL context,
+    int32_t textWidth,
+    int32_t textHeight,
+    int32_t* AMST_NONNULL width,
+    int32_t* AMST_NONNULL height
+) {
+    *width = textWidth + 10;
+    *height = textHeight + 10;
+}
+
 void amstDrawButton(AmstContext* AMST_NONNULL context, AmstButton* AMST_NONNULL button) {
     defsAssert(gInitialized);
 
@@ -148,8 +159,8 @@ void amstDrawButton(AmstContext* AMST_NONNULL context, AmstButton* AMST_NONNULL 
     amstGetTextMetrics(context, button->text, &textWidth, &textHeight);
 
     const bool mouseHovered =
-        context->mouseX >= button->x && context->mouseX <= textWidth + 5 &&
-        context->mouseY >= button->y && context->mouseY <= textHeight + 5;
+        context->mouseX >= button->x - 5 && context->mouseX <= textWidth + 10 &&
+        context->mouseY >= button->y - 5 && context->mouseY <= textHeight + 10;
 
     SDL_Color color = mouseHovered ? ((SDL_Color) {127, 127, 127, 127}) : ((SDL_Color) {255, 255, 255, 255});
 
@@ -159,14 +170,14 @@ void amstDrawButton(AmstContext* AMST_NONNULL context, AmstButton* AMST_NONNULL 
         context->renderer,
         texture,
         nullptr,
-        &((SDL_Rect) {button->x + 5, button->y + 5, textWidth, textHeight})
+        &((SDL_Rect) {button->x, button->y, textWidth, textHeight})
     );
     SDL_DestroyTexture(texture);
 
     uint8_t r, g, b, a;
     SDL_GetRenderDrawColor(context->renderer, &r, &g, &b, &a);
     SDL_SetRenderDrawColor(context->renderer, color.r, color.g, color.b, color.a);
-    SDL_RenderDrawRect(context->renderer, &((SDL_Rect) {button->x, button->y, textWidth + 5, textHeight + 5}));
+    SDL_RenderDrawRect(context->renderer, &((SDL_Rect) {button->x - 5, button->y - 5, textWidth + 10, textHeight + 10}));
     SDL_SetRenderDrawColor(context->renderer, r, g, b, a);
 
     if (context->mouseDown) {
