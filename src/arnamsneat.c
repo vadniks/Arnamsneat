@@ -142,7 +142,6 @@ static SDL_Texture* AMST_NONNULL renderText(
 }
 
 void amstGetButtonMetrics(
-    AmstContext* AMST_NONNULL context,
     int32_t textWidth,
     int32_t textHeight,
     int32_t* AMST_NONNULL width,

@@ -74,7 +74,6 @@ void amstGetTextMetrics(
 
 AMST_EXPORT
 void amstGetButtonMetrics(
-    AmstContext* AMST_NONNULL context,
     int32_t textWidth,
     int32_t textHeight,
     int32_t* AMST_NONNULL width,
