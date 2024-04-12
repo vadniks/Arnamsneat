@@ -4,9 +4,13 @@
 #include <arnamsneat/core.h>
 #include <arnamsneat/button.h>
 #include <arnamsneat/text.h>
+#include <arnamsneat/checkbox.h>
+
+static bool gCChecked = false;
 
 static void buttonAClicked(void) { SDL_Log("button a clicked"); }
 static void buttonBClicked(void) { SDL_Log("button b clicked"); }
+static void checkboxCClicked(void) { gCChecked = !gCChecked; }
 
 int main(void) {
     amstInit();
@@ -46,6 +50,9 @@ int main(void) {
         amstButton(context, "A", 10, 10, &buttonAClicked);
         amstGetLastDrawnSizes(context, &width, &height);
         amstButton(context, "B", 10 + width + 5, 10, &buttonBClicked);
+        amstCheckbox(context, "C", 10, 10 + height + 5, gCChecked, &checkboxCClicked);
+        amstGetLastDrawnSizes(context, &width, &height);
+        amstText(context, "Text", (SDL_Color) {255, 255, 255, 255}, 10, 10 + height * 2 + 5);
         amstDrawAll(context);
     }
     end:
