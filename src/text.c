@@ -35,8 +35,8 @@ void amstText(
 
     amstImage(context, surface, x, y);
 
-    context->lastWidth = surface->w;
-    context->lastHeight = surface->h;
+    context->lastDrawnWidth = surface->w;
+    context->lastDrawnHeight = surface->h;
 
     SDL_FreeSurface(surface);
 }

@@ -40,7 +40,7 @@ AMST_EXPORT
 void amstGetCurrentSizes(AmstContext* AMST_NONNULL context, int32_t* AMST_NONNULL width, int32_t* AMST_NONNULL height);
 
 AMST_EXPORT
-void amstGetLastSizes(AmstContext* AMST_NONNULL context, int32_t* AMST_NONNULL width, int32_t* AMST_NONNULL height);
+void amstGetLastDrawnSizes(AmstContext* AMST_NONNULL context, int32_t* AMST_NONNULL width, int32_t* AMST_NONNULL height);
 
 AMST_EXPORT
 void amstContextDestroy(AmstContext* AMST_NONNULL context);

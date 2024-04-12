@@ -91,10 +91,10 @@ void amstGetCurrentSizes(AmstContext* AMST_NONNULL context, int32_t* AMST_NONNUL
     *height = context->currentHeight;
 }
 
-void amstGetLastSizes(AmstContext* AMST_NONNULL context, int32_t* AMST_NONNULL width, int32_t* AMST_NONNULL height) {
+void amstGetLastDrawnSizes(AmstContext* AMST_NONNULL context, int32_t* AMST_NONNULL width, int32_t* AMST_NONNULL height) {
     defsAssert(gInitialized);
-    *width = context->lastWidth;
-    *height = context->lastHeight;
+    *width = context->lastDrawnWidth;
+    *height = context->lastDrawnHeight;
 }
 
 void amstContextDestroy(AmstContext* AMST_NONNULL context) {

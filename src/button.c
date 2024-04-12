@@ -58,8 +58,8 @@ void amstButton(
     SDL_RenderDrawRect(context->renderer, &((SDL_Rect) {x, y, width, height}));
     SDL_SetRenderDrawColor(context->renderer, r, g, b, a);
 
-    context->lastWidth = width;
-    context->lastHeight = height;
+    context->lastDrawnWidth = width;
+    context->lastDrawnHeight = height;
 
     if (mouseClicked) {
         context->mouseDown = false;

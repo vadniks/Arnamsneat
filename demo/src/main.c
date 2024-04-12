@@ -44,7 +44,7 @@ int main(void) {
         amstPrepareToDraw(context);
         int32_t width, height;
         amstButton(context, "A", 10, 10, &buttonAClicked);
-        amstGetLastSizes(context, &width, &height);
+        amstGetLastDrawnSizes(context, &width, &height);
         amstButton(context, "B", 10 + width + 5, 10, &buttonBClicked);
         amstDrawAll(context);
     }
