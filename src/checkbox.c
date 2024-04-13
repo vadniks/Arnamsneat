@@ -20,8 +20,8 @@ void amstGetCheckboxMetrics(
     int32_t* AMST_NONNULL height
 ) {
     defsAssert(gInitialized);
-    *width = 50 * 5 + textWidth;
-    *height = textHeight;
+    *width = textWidth + 5 + textWidth;
+    *height = textHeight + 10;
 }
 
 void amstCheckbox(
