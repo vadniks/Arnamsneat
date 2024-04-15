@@ -14,6 +14,7 @@ const int TEXTS_PER_LIST_PAGE = 8, TEXTS_COUNT = TEXTS_PER_LIST_PAGE * 3;
 static bool gCChecked = false;
 static bool gDChecked = false;
 static int gListOffset = 0;
+static char gListButton = 0;
 
 static void up(void) {
     if (gListOffset >= TEXTS_PER_LIST_PAGE)
@@ -28,7 +29,7 @@ static void down(void) {
 static void checkboxCClicked(void) { gCChecked = !gCChecked; }
 static void fieldInputHandler(const char* AMST_NONNULL input) { (void) input; }
 static void radioButtonClicked(void) { gDChecked = !gDChecked; }
-static void listButtonClicked(void) { SDL_Log("list button clicked"); }
+static void listButtonClicked(void) { SDL_Log("list button %c clicked", gListButton); }
 
 int main(void) {
     amstInit();
@@ -108,7 +109,8 @@ int main(void) {
 
         for (int i = 0; i < TEXTS_PER_LIST_PAGE; i++) {// aka list widget
             amstText(context, texts[i + gListOffset], AMST_FOREGROUND_COLOR, 500, i * 50);
-            amstButton(context, (char[1]) {(char) ('a' + i + gListOffset)}, 650, i * 50, &listButtonClicked);
+            gListButton = (char) ('a' + i + gListOffset);
+            amstButton(context, (char[1]) {gListButton}, 650, i * 50, &listButtonClicked);
         }
 
         amstDrawAll(context);
