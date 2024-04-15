@@ -20,6 +20,7 @@ struct AmstFieldState {
 };
 
 AmstFieldState* AMST_NONNULL amstCreateFieldState(void) {
+    defsAssert(gInitialized);
     AmstFieldState* state = defsMalloc(sizeof *state);
     state->input = nullptr;
     state->length = 0;
@@ -27,6 +28,7 @@ AmstFieldState* AMST_NONNULL amstCreateFieldState(void) {
 }
 
 void amstDestroyFieldState(AmstFieldState* AMST_NONNULL state) {
+    defsAssert(gInitialized);
     defsFree(state->input);
     defsFree(state);
 }
@@ -37,6 +39,8 @@ void amstGetFieldMetrics(
     int32_t* AMST_NONNULL width,
     int32_t* AMST_NONNULL height
 ) {
+    defsAssert(gInitialized);
+
     int32_t probeWidth, probeHeight;
     amstGetTextMetrics(context, "A", &probeWidth, &probeHeight);
 
