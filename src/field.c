@@ -78,17 +78,24 @@ void amstField(
         context->activeField = state;
     }
 
-    if (context->activeField == state && context->keyboardInputting && (textWidth < width || context->keyboardInputErasing)) {
-        state->input = defsRealloc(state->input, context->keyboardInputSize + 1);
-        SDL_memcpy(state->input, context->keyboardInput, context->keyboardInputSize);
-        state->length = context->keyboardInputSize;
-        state->input[context->keyboardInputSize] = 0;
-        inputHandler(state->input);
+    if (context->activeField == state && context->keyboardInputting) {
+        context->keyboardInputting = false;
+
+        if (textWidth < width) {
+            state->input = defsRealloc(state->input, state->length + 2);
+            state->input[state->length] = (context->keyboardInput + context->keyboardInputSize - 1)[0];
+            state->input[state->length + 1] = 0;
+            state->length++;
+
+            inputHandler(state->input);
+        } else if (context->keyboardInputErasing) {
+
+        }
     }
 
     if (state->input != nullptr && state->length > 0) {
-//        SDL_Log("%s", state->input); // <-- TODO
-        amstText(context, state->input, (SDL_Color) {255, 255, 255, 255}, x + 5, y + 5);
+        SDL_Log("%d %s", state->length, state->input); // <-- TODO
+//        amstText(context, state->input, (SDL_Color) {255, 255, 255, 255}, x + 5, y + 5);
     }
 
     SDL_Color color = mouseHovered ? ((SDL_Color) {127, 127, 127, 127}) : ((SDL_Color) {255, 255, 255, 255});
