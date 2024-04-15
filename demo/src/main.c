@@ -28,6 +28,7 @@ static void down(void) {
 static void checkboxCClicked(void) { gCChecked = !gCChecked; }
 static void fieldInputHandler(const char* AMST_NONNULL input) { (void) input; }
 static void radioButtonClicked(void) { gDChecked = !gDChecked; }
+static void listButtonClicked(void) { SDL_Log("list button clicked"); }
 
 int main(void) {
     amstInit();
@@ -105,8 +106,10 @@ int main(void) {
 
         amstRadioButton(context, "ddd", 100, 400, gDChecked, &radioButtonClicked);
 
-        for (int i = 0; i < TEXTS_PER_LIST_PAGE; i++) // aka list widget
+        for (int i = 0; i < TEXTS_PER_LIST_PAGE; i++) {// aka list widget
             amstText(context, texts[i + gListOffset], AMST_FOREGROUND_COLOR, 500, i * 50);
+            amstButton(context, (char[1]) {(char) ('a' + i + gListOffset)}, 650, i * 50, &listButtonClicked);
+        }
 
         amstDrawAll(context);
     }
