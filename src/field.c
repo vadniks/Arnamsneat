@@ -31,6 +31,19 @@ void amstDestroyFieldState(AmstFieldState* AMST_NONNULL state) {
     defsFree(state);
 }
 
+void amstGetFieldMetrics(
+    AmstContext* AMST_NONNULL context,
+    int32_t labelWidth,
+    int32_t* AMST_NONNULL width,
+    int32_t* AMST_NONNULL height
+) {
+    int32_t probeWidth, probeHeight;
+    amstGetTextMetrics(context, "A", &probeWidth, &probeHeight);
+
+    *width = defsMax(probeWidth, labelWidth) + 10;
+    *height = probeHeight + 10;
+}
+
 void amstField(
     AmstContext* AMST_NONNULL context,
     int32_t x,

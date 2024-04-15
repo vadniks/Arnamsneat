@@ -21,6 +21,14 @@ AMST_EXPORT
 void amstDestroyFieldState(AmstFieldState* AMST_NONNULL state);
 
 AMST_EXPORT
+void amstGetFieldMetrics(
+    AmstContext* AMST_NONNULL context,
+    int32_t labelWidth,
+    int32_t* AMST_NONNULL width,
+    int32_t* AMST_NONNULL height
+);
+
+AMST_EXPORT
 void amstField(
     AmstContext* AMST_NONNULL context,
     int32_t x,
