@@ -9,11 +9,22 @@
 #include <arnamsneat/infiiteProgressbar.h>
 #include <arnamsneat/radioButon.h>
 
+const int TEXTS_PER_LIST_PAGE = 8, TEXTS_COUNT = TEXTS_PER_LIST_PAGE * 3;
+
 static bool gCChecked = false;
 static bool gDChecked = false;
+static int gListOffset = 0;
 
-static void buttonAClicked(void) { SDL_Log("button a clicked"); }
-static void buttonBClicked(void) { SDL_Log("button b clicked"); }
+static void up(void) {
+    if (gListOffset >= TEXTS_PER_LIST_PAGE)
+        gListOffset -= TEXTS_PER_LIST_PAGE;
+}
+
+static void down(void) {
+    if (gListOffset + TEXTS_PER_LIST_PAGE < TEXTS_COUNT)
+        gListOffset += TEXTS_PER_LIST_PAGE;
+}
+
 static void checkboxCClicked(void) { gCChecked = !gCChecked; }
 static void fieldInputHandler(const char* AMST_NONNULL input) { (void) input; }
 static void radioButtonClicked(void) { gDChecked = !gDChecked; }
@@ -47,6 +58,24 @@ int main(void) {
     AmstFieldState* fieldState1 = amstCreateFieldState();
     AmstFieldState* fieldState2 = amstCreateFieldState();
 
+    const int textSize = 10;
+    char** texts = SDL_malloc(TEXTS_COUNT * sizeof(void*));
+
+    for (int i = 0; i < TEXTS_COUNT; i++) {
+        texts[i] = SDL_malloc(textSize * sizeof(char));
+
+        SDL_memset(texts[i], 'a' + i, textSize - 1);
+        texts[i][textSize - 1] = 0;
+
+        SDL_Log("%d %s", i, texts[i]);
+    }
+
+    int textWidth, textHeight;
+    amstGetTextMetrics(context, "AAAAAAAAAA", &textWidth, &textHeight);
+
+    const int listWidth = textWidth, listHeight = textHeight * TEXTS_PER_LIST_PAGE;
+    const int pageSize = textHeight * TEXTS_COUNT / listHeight;
+
     SDL_Event event;
     while (true) {
         while (SDL_PollEvent(&event)) {
@@ -57,10 +86,10 @@ int main(void) {
         amstPrepareToDraw(context);
         int32_t width, height;
 
-        amstButton(context, "A", 10, 10, &buttonAClicked);
+        amstButton(context, "Up", 10, 10, &up);
 
         amstGetLastDrawnSizes(context, &width, &height);
-        amstButton(context, "Bb", 10 + width + 5, 10, &buttonBClicked);
+        amstButton(context, "Down", 10 + width + 5, 10, &down);
 
         amstCheckbox(context, "C", 10, 10 + height + 5, gCChecked, &checkboxCClicked);
 
@@ -76,9 +105,16 @@ int main(void) {
 
         amstRadioButton(context, "ddd", 100, 400, gDChecked, &radioButtonClicked);
 
+        for (int i = 0; i < TEXTS_PER_LIST_PAGE; i++) // aka list widget
+            amstText(context, texts[i + gListOffset], AMST_FOREGROUND_COLOR, 500, i * 50);
+
         amstDrawAll(context);
     }
     end:
+
+    for (int i = 0; i < TEXTS_COUNT; i++)
+        SDL_free(texts[i]);
+    SDL_free(texts);
 
     SDL_Log("label 1: %s; label 2: %s", amstFieldText(fieldState1), amstFieldText(fieldState2));
 
