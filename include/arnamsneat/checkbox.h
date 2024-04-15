@@ -25,6 +25,6 @@ void amstCheckbox(
     const char* AMST_NONNULL text,
     int32_t x,
     int32_t y,
-    bool checked, // true if checked
+    bool checked,
     void (* AMST_NONNULL clickHandler)(void)
 );

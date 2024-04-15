@@ -7,13 +7,16 @@
 #include <arnamsneat/checkbox.h>
 #include <arnamsneat/field.h>
 #include <arnamsneat/infiiteProgressbar.h>
+#include <arnamsneat/radioButon.h>
 
 static bool gCChecked = false;
+static bool gDChecked = false;
 
 static void buttonAClicked(void) { SDL_Log("button a clicked"); }
 static void buttonBClicked(void) { SDL_Log("button b clicked"); }
 static void checkboxCClicked(void) { gCChecked = !gCChecked; }
 static void fieldInputHandler(const char* AMST_NONNULL input) { (void) input; }
+static void radioButtonClicked(void) { gDChecked = !gDChecked; }
 
 int main(void) {
     amstInit();
@@ -70,6 +73,8 @@ int main(void) {
         amstField(context, 100 + width + 5, 100, "Label 2", fieldState2, &fieldInputHandler);
 
         amstInfiniteProgressbar(context, 100, 200);
+
+        amstRadioButton(context, "ddd", 100, 400, gDChecked, &radioButtonClicked);
 
         amstDrawAll(context);
     }
