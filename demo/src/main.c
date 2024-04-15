@@ -1,3 +1,11 @@
+/*
+  Arnamsneat (demo) - A SDL based GUI toolkit.
+  Copyright (C) 2024 Vadim Nikolaev (https://github.com/vadniks).
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+*/
 
 #include <stdlib.h>
 #include <arnamsneat/arnamsneat.h>
@@ -68,15 +76,10 @@ int main(void) {
 
         SDL_memset(texts[i], 'a' + i, textSize - 1);
         texts[i][textSize - 1] = 0;
-
-        SDL_Log("%d %s", i, texts[i]);
     }
 
     int textWidth, textHeight;
     amstGetTextMetrics(context, "AAAAAAAAAA", &textWidth, &textHeight);
-
-    const int listWidth = textWidth, listHeight = textHeight * TEXTS_PER_LIST_PAGE;
-    const int pageSize = textHeight * TEXTS_COUNT / listHeight;
 
     SDL_Event event;
     while (true) {
