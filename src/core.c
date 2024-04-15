@@ -79,6 +79,11 @@ void amstProcessEvent(AmstContext* AMST_NONNULL context, SDL_Event* AMST_NONNULL
             break;
         case SDL_KEYDOWN:
             context->keyboardInputting = true;
+            if (event->key.keysym.sym == SDLK_BACKSPACE && context->keyboardInputSize > 0) {
+                defsAssert(context->keyboardInputting);
+                context->keyboardInputSize--;
+                SDL_memset(context->keyboardInput + context->keyboardInputSize, 0, AMST_MAX_KEYBOARD_INPUT_SIZE - context->keyboardInputSize);
+            }
             break;
         case SDL_KEYUP:
             context->keyboardInputting = false;
@@ -90,10 +95,6 @@ void amstProcessEvent(AmstContext* AMST_NONNULL context, SDL_Event* AMST_NONNULL
             const int32_t size = (int32_t) SDL_strlen(event->text.text);
             SDL_memcpy(context->keyboardInput + context->keyboardInputSize, event->text.text, size);
             context->keyboardInputSize += size;
-            break;
-        case SDLK_BACKSPACE:
-            if (context->keyboardInputting)
-                ;
             break;
     }
 }
