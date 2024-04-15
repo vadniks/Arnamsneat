@@ -56,6 +56,7 @@ AmstContext* AMST_NULLABLE amstContextCreate(
     context->lastDrawnWidth = 0;
     context->lastDrawnHeight = 0;
     context->keyboardInputting = false;
+    context->keyboardInputErasing = false;
     SDL_memset(context->keyboardInput, 0, AMST_MAX_KEYBOARD_INPUT_SIZE);
     context->keyboardInputSize = 0;
     context->activeField = nullptr;
@@ -81,6 +82,8 @@ void amstProcessEvent(AmstContext* AMST_NONNULL context, SDL_Event* AMST_NONNULL
             context->keyboardInputting = true;
             if (event->key.keysym.sym == SDLK_BACKSPACE && context->keyboardInputSize > 0) {
                 defsAssert(context->keyboardInputting);
+                context->keyboardInputErasing = true;
+
                 context->keyboardInputSize--;
                 SDL_memset(context->keyboardInput + context->keyboardInputSize, 0, AMST_MAX_KEYBOARD_INPUT_SIZE - context->keyboardInputSize);
                 SDL_Log("%d %s", context->keyboardInputSize, context->keyboardInput);
@@ -88,6 +91,7 @@ void amstProcessEvent(AmstContext* AMST_NONNULL context, SDL_Event* AMST_NONNULL
             break;
         case SDL_KEYUP:
             context->keyboardInputting = false;
+            context->keyboardInputErasing = false;
             break;
         case SDL_TEXTINPUT:
             defsAssert(context->keyboardInputting);
