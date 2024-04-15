@@ -20,7 +20,7 @@ void amstGetTextMetrics(
     int32_t* AMST_NONNULL height
 ) {
     defsAssert(gInitialized);
-    TTF_SizeUTF8(context->font, text, width, height);
+    TTF_SizeText(context->font, text, width, height);
 }
 
 void amstText(
