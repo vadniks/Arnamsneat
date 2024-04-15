@@ -59,7 +59,7 @@ void amstField(
 
     int32_t textWidth, textHeight;
     if (state->input != nullptr)
-        amstGetTextMetrics(context, state->input, &labelWidth, &labelHeight);
+        amstGetTextMetrics(context, state->input, &textWidth, &textHeight);
     else {
         textWidth = 0;
         textHeight = 0;
@@ -78,7 +78,7 @@ void amstField(
         context->activeField = state;
     }
 
-    if (context->activeField == state && context->keyboardInputting && textWidth <= width) {
+    if (context->activeField == state && context->keyboardInputting && textWidth < width) {
         state->input = defsRealloc(state->input, context->keyboardInputSize + 1);
         SDL_memcpy(state->input, context->keyboardInput, context->keyboardInputSize);
         state->length = context->keyboardInputSize;
