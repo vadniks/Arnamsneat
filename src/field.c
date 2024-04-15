@@ -63,12 +63,14 @@ void amstField(
         context->mouseX >= x && context->mouseX <= x + width + 10 &&
         context->mouseY >= y && context->mouseY <= y + height + 10;
 
+    const bool active = context->activeField == state;
+
     if (mouseHovered && context->mouseDown) {
         context->mouseDown = false;
         context->activeField = state;
     }
 
-    if (context->activeField == state) {
+    if (active) {
         if (context->keyboardInputErasing && state->length > 0) {
             context->keyboardInputErasing = false;
             state->length--;
@@ -99,7 +101,13 @@ void amstField(
             y + 5
         );
 
-    SDL_Color color = amstMakeColor(mouseHovered ? amstHoverColor : amstForegroundColor);
+    SDL_Color color = amstMakeColor(
+        mouseHovered
+            ? amstHoverColor
+            : active
+                ? amstActiveColor
+                : amstForegroundColor
+    );
 
     uint8_t r, g, b, a;
     SDL_GetRenderDrawColor(context->renderer, &r, &g, &b, &a);
