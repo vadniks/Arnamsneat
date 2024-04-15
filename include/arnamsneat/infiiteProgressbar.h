@@ -12,7 +12,11 @@
 #include <arnamsneat/arnamsneat.h>
 
 AMST_EXPORT
-void amstGetInfiniteProgressbarMetrics(int32_t* AMST_NONNULL width, int32_t* AMST_NONNULL height);
+void amstGetInfiniteProgressbarMetrics(
+    AmstContext* AMST_NONNULL context,
+    int32_t* AMST_NONNULL width,
+    int32_t* AMST_NONNULL height
+);
 
 AMST_EXPORT
-void amstInfiniteProgressBar(int32_t x, int32_t y);
+void amstInfiniteProgressbar(AmstContext* AMST_NONNULL context, int32_t x, int32_t y);

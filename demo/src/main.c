@@ -6,6 +6,7 @@
 #include <arnamsneat/text.h>
 #include <arnamsneat/checkbox.h>
 #include <arnamsneat/field.h>
+#include <arnamsneat/infiiteProgressbar.h>
 
 static bool gCChecked = false;
 
@@ -67,6 +68,8 @@ int main(void) {
 
         amstGetLastDrawnSizes(context, &width, &height);
         amstField(context, 100 + width + 5, 100, "Label 2", fieldState2, &fieldInputHandler);
+
+        amstInfiniteProgressbar(context, 100, 200);
 
         amstDrawAll(context);
     }
