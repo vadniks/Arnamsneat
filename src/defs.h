@@ -23,3 +23,5 @@ bool defsSuccessful(int result);
 void* AMST_NONNULL defsMalloc(size_t size);
 void* AMST_NONNULL defsRealloc(void* AMST_NULLABLE memory, size_t size);
 void defsFree(void* AMST_NULLABLE memory);
+int32_t defsMax(int32_t a, int32_t b);
+int32_t defsMin(int32_t a, int32_t b);

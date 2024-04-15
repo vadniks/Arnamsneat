@@ -27,3 +27,7 @@ void* AMST_NONNULL defsRealloc(void* AMST_NULLABLE memory, size_t size) {
 }
 
 void defsFree(void* AMST_NULLABLE memory) { SDL_free(memory); }
+
+int32_t defsMax(int32_t a, int32_t b) { return a > b ? a : b; }
+
+int32_t defsMin(int32_t a, int32_t b) { return a < b ? a : b; }

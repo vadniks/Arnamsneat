@@ -48,8 +48,17 @@ AmstContext* AMST_NULLABLE amstContextCreate(
     AmstContext* context = defsMalloc(sizeof *context);
     context->window = window;
     context->renderer = renderer;
-    context->font = font;
     updateSizes(context);
+    context->font = font;
+    context->mouseX = 0;
+    context->mouseY = 0;
+    context->mouseDown = false;
+    context->lastDrawnWidth = 0;
+    context->lastDrawnHeight = 0;
+    context->keyboardInputting = false;
+    context->keyboardInput = (char[AMST_MAX_KEYBOARD_INPUT_SIZE]) {0};
+    context->keyboardInputSize = 0;
+    context->activeField = nullptr;
 
     return context;
 }
@@ -68,9 +77,16 @@ void amstProcessEvent(AmstContext* AMST_NONNULL context, SDL_Event* AMST_NONNULL
         case SDL_MOUSEBUTTONUP:
             context->mouseDown = false;
             break;
-    }
+        case SDL_KEYDOWN:
+            context->keyboardInputting = true;
+            break;
+        case SDL_KEYUP:
+            context->keyboardInputting = false;
+            break;
+        case SDL_TEXTINPUT:
 
-    DEFS_USED(event);
+            break;
+    }
 }
 
 void amstPrepareToDraw(AmstContext* AMST_NONNULL context) {

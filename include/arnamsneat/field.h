@@ -11,6 +11,9 @@
 
 #include <arnamsneat/arnamsneat.h>
 
+struct AmstFieldState;
+typedef struct AmstFieldState AmstFieldState;
+
 AMST_EXPORT
 void amstGetFieldMetrics(
     int32_t textWidth,
@@ -20,9 +23,17 @@ void amstGetFieldMetrics(
 );
 
 AMST_EXPORT
+AmstFieldState* AMST_NONNULL amstCreateFieldState(void);
+
+AMST_EXPORT
+void amstDestroyFieldState(AmstFieldState* AMST_NONNULL state);
+
+AMST_EXPORT
 void amstField(
     AmstContext* AMST_NONNULL context,
     int32_t x,
     int32_t y,
-    void (* AMST_NONNULL inputHandler)(const char*)
+    const char* AMST_NONNULL label,
+    AmstFieldState* AMST_NONNULL state,
+    void (* AMST_NONNULL inputHandler)(const char* AMST_NONNULL)
 );
