@@ -1,5 +1,5 @@
 
-# A simple lightweight GUI toolkit in a form of shared C library.
+# A simple, lightweight and flexible GUI toolkit library
 
 Originally intended to be just a payload for a shared library and 
 the creation of a shared library for C language was the main goal, 
