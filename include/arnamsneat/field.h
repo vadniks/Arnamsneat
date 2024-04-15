@@ -15,14 +15,6 @@ struct AmstFieldState;
 typedef struct AmstFieldState AmstFieldState;
 
 AMST_EXPORT
-void amstGetFieldMetrics(
-    int32_t textWidth,
-    int32_t textHeight,
-    int32_t* AMST_NONNULL width,
-    int32_t* AMST_NONNULL height
-);
-
-AMST_EXPORT
 AmstFieldState* AMST_NONNULL amstCreateFieldState(void);
 
 AMST_EXPORT

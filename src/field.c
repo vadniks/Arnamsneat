@@ -14,23 +14,12 @@
 #include "defs.h"
 
 struct AmstFieldState {
-    bool active;
     char* AMST_NULLABLE input;
     int32_t length;
 };
 
-void amstGetFieldMetrics(
-    int32_t textWidth,
-    int32_t textHeight,
-    int32_t* AMST_NONNULL width,
-    int32_t* AMST_NONNULL height
-) {
-    defsAssert(gInitialized);
-}
-
 AmstFieldState* AMST_NONNULL amstCreateFieldState(void) {
     AmstFieldState* state = defsMalloc(sizeof *state);
-    state->active = false;
     state->input = nullptr;
     state->length = 0;
     return state;

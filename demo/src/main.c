@@ -40,7 +40,8 @@ int main(void) {
 
     AmstContext* context = amstContextCreate(window, renderer, font);
 
-    AmstFieldState* fieldState = amstCreateFieldState();
+    AmstFieldState* fieldState1 = amstCreateFieldState();
+    AmstFieldState* fieldState2 = amstCreateFieldState();
 
     SDL_Event event;
     while (true) {
@@ -62,13 +63,17 @@ int main(void) {
         amstGetLastDrawnSizes(context, &width, &height);
         amstText(context, "Text", (SDL_Color) {255, 255, 255, 255}, 10, 10 + height * 2 + 5);
 
-        amstField(context, 100, 100, "Label", fieldState, &fieldInputHandler);
+        amstField(context, 100, 100, "Label 1", fieldState1, &fieldInputHandler);
+
+        amstGetLastDrawnSizes(context, &width, &height);
+        amstField(context, 100 + width + 5, 100, "Label 2", fieldState2, &fieldInputHandler);
 
         amstDrawAll(context);
     }
     end:
 
-    amstDestroyFieldState(fieldState);
+    amstDestroyFieldState(fieldState1);
+    amstDestroyFieldState(fieldState2);
 
     amstContextDestroy(context);
     TTF_CloseFont(font);
