@@ -13,7 +13,6 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wpedantic"
-#pragma clang diagnostic ignored "-Wunknown-pragmas"
 typedef enum {
     AMST_BACKGROUND_COLOR = 0x25252525,
     AMST_FOREGROUND_COLOR = 0xffffffff,
