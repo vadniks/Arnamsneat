@@ -20,7 +20,11 @@ void amstGetRadioButtonMetrics(
     int32_t* AMST_NONNULL width,
     int32_t* AMST_NONNULL height
 ) {
+    defsAssert(gInitialized);
+    const int32_t radius = 15;
 
+    *width = radius * 2 + 5 + textWidth;
+    *height = defsMax(radius, textHeight);
 }
 
 static void drawCircle(SDL_Renderer* renderer, int32_t centerX, int32_t centerY, int32_t radius) { // Midpoint Circle Algorithm
@@ -64,6 +68,7 @@ void amstRadioButton(
     bool checked,
     void (* AMST_NONNULL clickHandler)(void)
 ) {
+    defsAssert(gInitialized);
     const int32_t radius = 15;
 
     int32_t textWidth, textHeight;
