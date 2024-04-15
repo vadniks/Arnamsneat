@@ -78,5 +78,23 @@ void amstField(
         context->activeField = state;
     }
 
+    if (context->activeField == state && context->keyboardInputting) {
+        state->input = defsRealloc(state->input, context->keyboardInputSize);
+        SDL_memcpy(state->input, context->keyboardInput, context->keyboardInputSize);
+        state->length = context->keyboardInputSize;
+        inputHandler(state->input);
+    }
 
+    if (state->input != nullptr)
+        amstText(context, state->input, (SDL_Color) {255, 255, 255, 255}, x + 5, y + 5);
+
+    uint8_t r, g, b, a;
+    SDL_GetRenderDrawColor(context->renderer, &r, &g, &b, &a);
+    SDL_SetRenderDrawColor(context->renderer, 255, 255, 255, 255);
+
+    SDL_RenderDrawRect(context->renderer, &((SDL_Rect) {x, y, width + 10, height + 10}));
+    SDL_SetRenderDrawColor(context->renderer, r, g, b, a);
+
+    context->lastDrawnWidth = width + 10;
+    context->lastDrawnHeight = height + 10;
 }

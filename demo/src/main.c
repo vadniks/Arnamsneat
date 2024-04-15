@@ -5,12 +5,17 @@
 #include <arnamsneat/button.h>
 #include <arnamsneat/text.h>
 #include <arnamsneat/checkbox.h>
+#include <arnamsneat/field.h>
 
 static bool gCChecked = false;
 
 static void buttonAClicked(void) { SDL_Log("button a clicked"); }
 static void buttonBClicked(void) { SDL_Log("button b clicked"); }
 static void checkboxCClicked(void) { gCChecked = !gCChecked; }
+
+static void fieldInputHandler(const char* AMST_NONNULL input) {
+
+}
 
 int main(void) {
     amstInit();
@@ -38,6 +43,8 @@ int main(void) {
 
     AmstContext* context = amstContextCreate(window, renderer, font);
 
+    AmstFieldState* fieldState = amstCreateFieldState();
+
     SDL_Event event;
     while (true) {
         while (SDL_PollEvent(&event)) {
@@ -47,15 +54,24 @@ int main(void) {
 
         amstPrepareToDraw(context);
         int32_t width, height;
+
         amstButton(context, "A", 10, 10, &buttonAClicked);
+
         amstGetLastDrawnSizes(context, &width, &height);
         amstButton(context, "Bb", 10 + width + 5, 10, &buttonBClicked);
+
         amstCheckbox(context, "C", 10, 10 + height + 5, gCChecked, &checkboxCClicked);
+
         amstGetLastDrawnSizes(context, &width, &height);
         amstText(context, "Text", (SDL_Color) {255, 255, 255, 255}, 10, 10 + height * 2 + 5);
+
+        amstField(context, 100, 100, "Label", fieldState, &fieldInputHandler);
+
         amstDrawAll(context);
     }
     end:
+
+    amstDestroyFieldState(fieldState);
 
     amstContextDestroy(context);
     TTF_CloseFont(font);
