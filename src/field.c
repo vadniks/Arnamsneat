@@ -85,8 +85,10 @@ void amstField(
         inputHandler(state->input);
     }
 
-    if (state->input != nullptr)
+    if (state->input != nullptr) {
+        SDL_Log("%s", state->input); // <-- TODO
         amstText(context, state->input, (SDL_Color) {255, 255, 255, 255}, x + 5, y + 5);
+    }
 
     uint8_t r, g, b, a;
     SDL_GetRenderDrawColor(context->renderer, &r, &g, &b, &a);

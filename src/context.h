@@ -26,7 +26,7 @@ struct _AmstContext {
     int32_t lastDrawnWidth;
     int32_t lastDrawnHeight;
     bool keyboardInputting;
-    const char* AMST_NONNULL keyboardInput;
+    char* AMST_NONNULL keyboardInput;
     int32_t keyboardInputSize;
     const void* AMST_NULLABLE activeField;
 };

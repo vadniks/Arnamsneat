@@ -12,10 +12,7 @@ static bool gCChecked = false;
 static void buttonAClicked(void) { SDL_Log("button a clicked"); }
 static void buttonBClicked(void) { SDL_Log("button b clicked"); }
 static void checkboxCClicked(void) { gCChecked = !gCChecked; }
-
-static void fieldInputHandler(const char* AMST_NONNULL input) {
-
-}
+static void fieldInputHandler(const char* AMST_NONNULL input) { (void) input; }
 
 int main(void) {
     amstInit();

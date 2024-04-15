@@ -12,6 +12,7 @@ void amstImage(
 ) {
     defsAssert(gInitialized);
     SDL_Texture* texture = SDL_CreateTextureFromSurface(context->renderer, surface);
+    defsAssert(texture != nullptr);
 
     SDL_RenderCopy(
         context->renderer,
