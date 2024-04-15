@@ -97,10 +97,8 @@ void amstField(
         }
     }
 
-    if (state->input != nullptr && state->length > 0) {
-        SDL_Log("%d %s", state->length, state->input);
+    if (state->input != nullptr && state->length > 0)
         amstText(context, state->input, (SDL_Color) {255, 255, 255, 255}, x + 5, y + 5);
-    }
 
     SDL_Color color = mouseHovered ? ((SDL_Color) {127, 127, 127, 127}) : ((SDL_Color) {255, 255, 255, 255});
 
