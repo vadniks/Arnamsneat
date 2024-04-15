@@ -1,2 +1,7 @@
 
-# A simple GUI toolkit shared C library
+# A simple lightweight GUI toolkit in a form of shared C library.
+
+Originally intended to be just a payload for a shared library and 
+the creation of a shared library for C language was the main goal, 
+then the intention was changed to: 'I need a gui for that openGl game, 
+so I'll make a some sort of an abstraction for gui primitives'.
