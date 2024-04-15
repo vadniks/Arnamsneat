@@ -38,7 +38,7 @@ static void updateSizes(AmstContext* AMST_NONNULL context) {
     SDL_RenderSetScale(context->renderer, context->scaleX, context->scaleY);
 }
 
-AmstContext* AMST_NULLABLE amstContextCreate(
+AmstContext* AMST_NULLABLE amstCreateContext(
     SDL_Window* AMST_NONNULL window,
     SDL_Renderer* AMST_NONNULL renderer,
     TTF_Font* AMST_NONNULL font
@@ -126,7 +126,7 @@ void amstGetLastDrawnSizes(AmstContext* AMST_NONNULL context, int32_t* AMST_NONN
     *height = context->lastDrawnHeight;
 }
 
-void amstContextDestroy(AmstContext* AMST_NONNULL context) {
+void amstDestroyContext(AmstContext* AMST_NONNULL context) {
     defsAssert(gInitialized);
     defsFree(context);
 }

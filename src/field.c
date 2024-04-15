@@ -72,6 +72,7 @@ void amstField(
             context->keyboardInputErasing = false;
             state->length--;
             state->input[state->length] = 0;
+            // no realloc to shrink the memory region's size 'cause it'll get freed anyway afterward
         }
 
         if (context->keyboardInputting && textWidth < width) {
@@ -108,4 +109,9 @@ void amstField(
 
     context->lastDrawnWidth = width + 10;
     context->lastDrawnHeight = height + 10;
+}
+
+const char* AMST_NULLABLE amstFieldText(AmstFieldState* AMST_NONNULL state) {
+    defsAssert(gInitialized);
+    return state->input;
 }

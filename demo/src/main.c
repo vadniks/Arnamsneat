@@ -38,7 +38,7 @@ int main(void) {
 
     TTF_Font* font = TTF_OpenFont("res/RobotoMono.ttf", 24);
 
-    AmstContext* context = amstContextCreate(window, renderer, font);
+    AmstContext* context = amstCreateContext(window, renderer, font);
 
     AmstFieldState* fieldState1 = amstCreateFieldState();
     AmstFieldState* fieldState2 = amstCreateFieldState();
@@ -72,10 +72,12 @@ int main(void) {
     }
     end:
 
+    SDL_Log("label 1: %s; label 2: %s", amstFieldText(fieldState1), amstFieldText(fieldState2));
+
     amstDestroyFieldState(fieldState1);
     amstDestroyFieldState(fieldState2);
 
-    amstContextDestroy(context);
+    amstDestroyContext(context);
     TTF_CloseFont(font);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);

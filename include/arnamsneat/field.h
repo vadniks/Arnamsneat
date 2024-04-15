@@ -29,3 +29,6 @@ void amstField(
     AmstFieldState* AMST_NONNULL state,
     void (* AMST_NONNULL inputHandler)(const char* AMST_NONNULL)
 );
+
+AMST_EXPORT
+const char* AMST_NULLABLE amstFieldText(AmstFieldState* AMST_NONNULL state);
