@@ -7,6 +7,7 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
+#include <arnamsneat/core.h>
 #include <arnamsneat/field.h>
 #include <arnamsneat/text.h>
 #include "internal.h"
@@ -88,17 +89,17 @@ void amstField(
     }
 
     if (state->input != nullptr && state->length > 0)
-        amstText(context, state->input, (SDL_Color) {255, 255, 255, 255}, x + 5, y + 5);
+        amstText(context, state->input, amstForegroundColor, x + 5, y + 5);
     else
         amstText(
             context,
             label,
-            mouseHovered ? ((SDL_Color) {127, 127, 127, 127}) : ((SDL_Color) {255, 255, 255, 200}),
+            mouseHovered ? amstHoverColor : amstSecondaryColor,
             x + 5,
             y + 5
         );
 
-    SDL_Color color = mouseHovered ? ((SDL_Color) {127, 127, 127, 127}) : ((SDL_Color) {255, 255, 255, 255});
+    SDL_Color color = amstMakeColor(mouseHovered ? amstHoverColor : amstForegroundColor);
 
     uint8_t r, g, b, a;
     SDL_GetRenderDrawColor(context->renderer, &r, &g, &b, &a);

@@ -7,6 +7,7 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
+#include <arnamsneat/core.h>
 #include <arnamsneat/checkbox.h>
 #include <arnamsneat/text.h>
 #include "internal.h"
@@ -44,16 +45,15 @@ void amstCheckbox(
 
     const bool mouseClicked = mouseHovered && context->mouseDown;
 
-    const SDL_Color textColor = {255, 255, 255, 255};
-
-    const SDL_Color boxColor =
+    const SDL_Color boxColor = amstMakeColor(
         mouseClicked
-        ? ((SDL_Color) {50, 50, 50, 50})
-        : mouseHovered
-            ? ((SDL_Color) {127, 127, 127, 127})
-            : textColor;
+            ? amstActiveColor
+            : mouseHovered
+                ? amstHoverColor
+                : amstForegroundColor
+    );
 
-    amstText(context, text, textColor, x + boxSize + 5, y + 5);
+    amstText(context, text, amstForegroundColor, x + boxSize + 5, y + 5);
 
     uint8_t r, g, b, a;
     SDL_GetRenderDrawColor(context->renderer, &r, &g, &b, &a);

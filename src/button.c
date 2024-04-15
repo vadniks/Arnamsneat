@@ -7,6 +7,7 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
+#include <arnamsneat/core.h>
 #include <arnamsneat/button.h>
 #include <arnamsneat/text.h>
 #include "internal.h"
@@ -43,14 +44,15 @@ void amstButton(
 
     const bool mouseClicked = mouseHovered && context->mouseDown;
 
-    const SDL_Color color =
+    const uint32_t colorInt =
         mouseClicked
-        ? ((SDL_Color) {50, 50, 50, 50})
-        : mouseHovered
-            ? ((SDL_Color) {127, 127, 127, 127})
-            : ((SDL_Color) {255, 255, 255, 255});
+            ? amstActiveColor
+            : mouseHovered
+                ? amstHoverColor
+                : amstForegroundColor;
+    const SDL_Color color = amstMakeColor(colorInt);
 
-    amstText(context, text, color, x + 5, y + 5);
+    amstText(context, text, colorInt, x + 5, y + 5);
 
     uint8_t r, g, b, a;
     SDL_GetRenderDrawColor(context->renderer, &r, &g, &b, &a);

@@ -12,6 +12,12 @@
 #include "context.h"
 #include "defs.h"
 
+uint32_t amstBackgroundColor = AMST_BACKGROUND_COLOR;
+uint32_t amstForegroundColor = AMST_FOREGROUND_COLOR;
+uint32_t amstHoverColor = AMST_HOVER_COLOR;
+uint32_t amstActiveColor = AMST_ACTIVE_COLOR;
+uint32_t amstSecondaryColor = AMST_SECONDARY_COLOR;
+
 void amstInit(void) {
     if (gInitialized) return;
     gInitialized = true;
@@ -104,8 +110,10 @@ void amstProcessEvent(AmstContext* AMST_NONNULL context, SDL_Event* AMST_NONNULL
 
 void amstPrepareToDraw(AmstContext* AMST_NONNULL context) {
     defsAssert(gInitialized);
+    const SDL_Color background = amstMakeColor(amstBackgroundColor);
+
     SDL_GetWindowSizeInPixels(context->window, &(context->currentWidth), &(context->currentHeight));
-    SDL_SetRenderDrawColor(context->renderer, 50, 50, 50, 255);
+    SDL_SetRenderDrawColor(context->renderer, background.r, background.g, background.b, background.a);
     SDL_RenderClear(context->renderer);
 }
 
@@ -124,6 +132,15 @@ void amstGetLastDrawnSizes(AmstContext* AMST_NONNULL context, int32_t* AMST_NONN
     defsAssert(gInitialized);
     *width = context->lastDrawnWidth;
     *height = context->lastDrawnHeight;
+}
+
+SDL_Color amstMakeColor(AmstColor color) {
+    return (SDL_Color) {
+        (color >> 0) & 0xff,
+        (color >> 8) & 0xff,
+        (color >> 16) & 0xff,
+        (color >> 24) & 0xff,
+    };
 }
 
 void amstDestroyContext(AmstContext* AMST_NONNULL context) {

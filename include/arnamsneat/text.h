@@ -23,7 +23,7 @@ AMST_EXPORT
 void amstText(
     AmstContext* AMST_NONNULL context,
     const char* AMST_NONNULL text,
-    SDL_Color color,
+    uint32_t color,
     int32_t x,
     int32_t y
 );

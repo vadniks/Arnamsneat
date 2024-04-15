@@ -7,6 +7,7 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
+#include <arnamsneat/core.h>
 #include <arnamsneat/text.h>
 #include <arnamsneat/image.h>
 #include "defs.h"
@@ -26,12 +27,12 @@ void amstGetTextMetrics(
 void amstText(
     AmstContext* AMST_NONNULL context,
     const char* AMST_NONNULL text,
-    SDL_Color color,
+    uint32_t color,
     int32_t x,
     int32_t y
 ) {
     defsAssert(gInitialized);
-    SDL_Surface* surface = TTF_RenderText_Blended(context->font, text, color);
+    SDL_Surface* surface = TTF_RenderText_Blended(context->font, text, amstMakeColor(color));
 
     amstImage(context, surface, x, y);
 

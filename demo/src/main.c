@@ -61,7 +61,7 @@ int main(void) {
         amstCheckbox(context, "C", 10, 10 + height + 5, gCChecked, &checkboxCClicked);
 
         amstGetLastDrawnSizes(context, &width, &height);
-        amstText(context, "Text", (SDL_Color) {255, 255, 255, 255}, 10, 10 + height * 2 + 5);
+        amstText(context, "Text", AMST_FOREGROUND_COLOR, 10, 10 + height * 2 + 5);
 
         amstField(context, 100, 100, "Label 1", fieldState1, &fieldInputHandler);
 
