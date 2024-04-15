@@ -22,7 +22,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE include)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
 
-set(EXE_DEMO exeDemo)
-add_subdirectory(demo)
+set(DEMO demo)
+add_subdirectory(${DEMO})
 
-file(COPY demo/res DESTINATION ${CMAKE_BINARY_DIR}/demo)
+file(COPY ${DEMO}/res DESTINATION ${CMAKE_BINARY_DIR}/demo)
