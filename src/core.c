@@ -135,6 +135,9 @@ void amstGetLastDrawnSizes(AmstContext* AMST_NONNULL context, int32_t* AMST_NONN
 }
 
 SDL_Color amstMakeColor(AmstColor color) {
+    const int32_t probe = 0x12345678;
+    defsAssert(*((defsByte*) &probe) == 0x78);
+
     return (SDL_Color) {
         (color >> 0) & 0xff,
         (color >> 8) & 0xff,
