@@ -12,7 +12,9 @@ add_compile_options("-O3")
 add_compile_options("-fvisibility=hidden")
 #add_link_options("-s")
 
-add_compile_options("-Wno-nullability-extension")
+if(CMAKE_C_COMPILER_ID STREQUAL "Clang")
+    add_compile_options("-Wno-nullability-extension")
+endif()
 
 file(GLOB SOURCES CONFIGURE_DEPENDS include/arnamsneat/*.h src/*.c src/*.h)
 add_library(${PROJECT_NAME} SHARED ${SOURCES} ${INCLUDES})
