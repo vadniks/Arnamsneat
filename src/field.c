@@ -38,7 +38,7 @@ AmstFieldState* AMST_NONNULL amstCreateFieldState(void) {
 
 void amstDestroyFieldState(AmstFieldState* AMST_NONNULL state) {
     defsFree(state->input);
-    defsAssert(state);
+    defsFree(state);
 }
 
 void amstField(
@@ -79,22 +79,22 @@ void amstField(
     }
 
     if (context->activeField == state && context->keyboardInputting) {
-        state->input = defsRealloc(state->input, context->keyboardInputSize);
-        SDL_memcpy(state->input, context->keyboardInput, context->keyboardInputSize);
-        state->length = context->keyboardInputSize;
-        inputHandler(state->input);
+//        state->input = defsRealloc(state->input, context->keyboardInputSize);
+//        SDL_memcpy(state->input, context->keyboardInput, context->keyboardInputSize);
+//        state->length = context->keyboardInputSize;
+//        inputHandler(state->input);
     }
 
-    if (state->input != nullptr) {
+//    if (state->length > 0) {
         SDL_Log("%s", state->input); // <-- TODO
-        amstText(context, state->input, (SDL_Color) {255, 255, 255, 255}, x + 5, y + 5);
-    }
+//        amstText(context, state->input, (SDL_Color) {255, 255, 255, 255}, x + 5, y + 5);
+//    }
 
     uint8_t r, g, b, a;
     SDL_GetRenderDrawColor(context->renderer, &r, &g, &b, &a);
     SDL_SetRenderDrawColor(context->renderer, 255, 255, 255, 255);
 
-    SDL_RenderDrawRect(context->renderer, &((SDL_Rect) {x, y, width + 10, height + 10}));
+    SDL_RenderDrawLine(context->renderer, x, y + height + 10, x + width + 10, y + height + 10);
     SDL_SetRenderDrawColor(context->renderer, r, g, b, a);
 
     context->lastDrawnWidth = width + 10;

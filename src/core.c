@@ -56,7 +56,7 @@ AmstContext* AMST_NULLABLE amstContextCreate(
     context->lastDrawnWidth = 0;
     context->lastDrawnHeight = 0;
     context->keyboardInputting = false;
-    context->keyboardInput = (char[AMST_MAX_KEYBOARD_INPUT_SIZE]) {0};
+    SDL_memset(context->keyboardInput, 0, AMST_MAX_KEYBOARD_INPUT_SIZE);
     context->keyboardInputSize = 0;
     context->activeField = nullptr;
 
