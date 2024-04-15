@@ -78,7 +78,7 @@ void amstField(
         context->activeField = state;
     }
 
-    if (context->activeField == state && context->keyboardInputting && textWidth < width) {
+    if (context->activeField == state && context->keyboardInputting) {
         state->input = defsRealloc(state->input, context->keyboardInputSize + 1);
         SDL_memcpy(state->input, context->keyboardInput, context->keyboardInputSize);
         state->length = context->keyboardInputSize;
@@ -86,7 +86,7 @@ void amstField(
         inputHandler(state->input);
     }
 
-    if (state->input != nullptr) {
+    if (state->input != nullptr && state->length > 0) {
 //        SDL_Log("%s", state->input); // <-- TODO
         amstText(context, state->input, (SDL_Color) {255, 255, 255, 255}, x + 5, y + 5);
     }

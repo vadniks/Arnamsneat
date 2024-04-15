@@ -83,6 +83,7 @@ void amstProcessEvent(AmstContext* AMST_NONNULL context, SDL_Event* AMST_NONNULL
                 defsAssert(context->keyboardInputting);
                 context->keyboardInputSize--;
                 SDL_memset(context->keyboardInput + context->keyboardInputSize, 0, AMST_MAX_KEYBOARD_INPUT_SIZE - context->keyboardInputSize);
+                SDL_Log("%d %s", context->keyboardInputSize, context->keyboardInput);
             }
             break;
         case SDL_KEYUP:
