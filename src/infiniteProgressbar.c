@@ -32,29 +32,29 @@ void amstGetInfiniteProgressbarMetrics(
     amstGetTextMetrics(context, "==----------", width, height);
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunknown-pragmas"
-#pragma ide diagnostic ignored "ConstantConditionsOC"
-#pragma ide diagnostic ignored "Simplify"
 void amstInfiniteProgressbar(AmstContext* AMST_NONNULL context, int32_t x, int32_t y) {
     defsAssert(gInitialized);
     const uint32_t interval = SDL_GetTicks() % STATE_F;
 
     const char* string;
-    if (STATE_A >= interval && interval <= STATE_B)
+
+    if (STATE_A >= interval)
         string = "==----------";
-    else if (STATE_B >= interval && interval <= STATE_C)
+    else if (STATE_B >= interval)
         string = "--==--------";
-    else if (STATE_C >= interval && interval <= STATE_D)
+    else if (STATE_C >= interval)
         string = "----==------";
-    else if (STATE_D >= interval && interval <= STATE_E)
+    else if (STATE_D >= interval)
         string = "------==----";
-    else if (STATE_E >= interval && interval <= STATE_F)
+    else if (STATE_E >= interval)
         string = "--------==--";
     else if (STATE_F >= interval)
         string = "----------==";
+
     amstText(context, string, amstActiveColor, x, y);
 
-    // last drawn
+    int32_t width, height;
+    amstGetInfiniteProgressbarMetrics(context, &width, &height);
+    context->lastDrawnWidth = width;
+    context->lastDrawnHeight = height;
 }
-#pragma clang diagnostic pop
