@@ -70,29 +70,32 @@ void amstField(
         height = probeHeight;
 
     const bool mouseHovered =
-        context->mouseX >= x && context->mouseX <= x + width &&
-        context->mouseY >= y && context->mouseY <= y + height;
+        context->mouseX >= x && context->mouseX <= x + width + 10 &&
+        context->mouseY >= y && context->mouseY <= y + height + 10;
 
     if (mouseHovered && context->mouseDown) {
         context->mouseDown = false;
         context->activeField = state;
     }
 
-    if (context->activeField == state && context->keyboardInputting) {
-//        state->input = defsRealloc(state->input, context->keyboardInputSize);
-//        SDL_memcpy(state->input, context->keyboardInput, context->keyboardInputSize);
-//        state->length = context->keyboardInputSize;
-//        inputHandler(state->input);
+    if (context->activeField == state && context->keyboardInputting && textWidth <= width) {
+        state->input = defsRealloc(state->input, context->keyboardInputSize + 1);
+        SDL_memcpy(state->input, context->keyboardInput, context->keyboardInputSize);
+        state->length = context->keyboardInputSize;
+        state->input[context->keyboardInputSize] = 0;
+        inputHandler(state->input);
     }
 
-//    if (state->length > 0) {
+    if (state->input != nullptr) {
         SDL_Log("%s", state->input); // <-- TODO
-//        amstText(context, state->input, (SDL_Color) {255, 255, 255, 255}, x + 5, y + 5);
-//    }
+        amstText(context, state->input, (SDL_Color) {255, 255, 255, 255}, x + 5, y + 5);
+    }
+
+    SDL_Color color = mouseHovered ? ((SDL_Color) {127, 127, 127, 127}) : ((SDL_Color) {255, 255, 255, 255});
 
     uint8_t r, g, b, a;
     SDL_GetRenderDrawColor(context->renderer, &r, &g, &b, &a);
-    SDL_SetRenderDrawColor(context->renderer, 255, 255, 255, 255);
+    SDL_SetRenderDrawColor(context->renderer, color.r, color.g, color.b, color.a);
 
     SDL_RenderDrawLine(context->renderer, x, y + height + 10, x + width + 10, y + height + 10);
     SDL_SetRenderDrawColor(context->renderer, r, g, b, a);
