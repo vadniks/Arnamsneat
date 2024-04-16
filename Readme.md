@@ -8,3 +8,13 @@ Example usage is shown in the demo executable.
 ## Screenshot
 
 ![alt text](screenshot.png)
+
+## Build
+
+```shell
+mkdir build
+cd build
+cmake ..
+make
+./demo # run demo
+```
