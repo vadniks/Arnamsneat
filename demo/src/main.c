@@ -25,13 +25,13 @@ static int gListOffset = 0;
 static char gListButton = 0;
 
 static void up(void) {
-    if (gListOffset >= TEXTS_PER_LIST_PAGE)
-        gListOffset -= TEXTS_PER_LIST_PAGE;
+    if (gListOffset > 0)
+        gListOffset -= 1;
 }
 
 static void down(void) {
-    if (gListOffset + TEXTS_PER_LIST_PAGE < TEXTS_COUNT)
-        gListOffset += TEXTS_PER_LIST_PAGE;
+    if (gListOffset + 1 < TEXTS_COUNT)
+        gListOffset += 1;
 }
 
 static void checkboxCClicked(void) { gCChecked = !gCChecked; }
@@ -111,6 +111,7 @@ int main(void) {
         amstRadioButton(context, "ddd", 100, 400, gDChecked, &radioButtonClicked);
 
         for (int i = 0; i < TEXTS_PER_LIST_PAGE; i++) {// aka list widget
+            if (i + gListOffset >= TEXTS_COUNT) break;
             amstText(context, texts[i + gListOffset], AMST_FOREGROUND_COLOR, 500, i * 50);
             gListButton = (char) ('a' + i + gListOffset);
             amstButton(context, (char[1]) {gListButton}, 650, i * 50, &listButtonClicked);
