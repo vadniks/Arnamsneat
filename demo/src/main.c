@@ -86,6 +86,13 @@ int main(void) {
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) goto end;
             amstProcessEvent(context, &event);
+
+            if (event.type == SDL_MOUSEWHEEL) {
+                if (event.wheel.y > 0)
+                    up();
+                else
+                    down();
+            }
         }
 
         amstPrepareToDraw(context);
