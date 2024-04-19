@@ -85,16 +85,17 @@ void amstProcessEvent(AmstContext* AMST_NONNULL context, SDL_Event* AMST_NONNULL
             context->mouseDown = false;
             break;
         case SDL_KEYDOWN:
-            if (event->key.keysym.sym == SDLK_BACKSPACE && context->keyboardInputSize > 0) {
-                context->keyboardInputErasing = true;
+            if (event->key.keysym.sym != SDLK_BACKSPACE || context->keyboardInputSize <= 0)
+                break;
 
-                context->keyboardInputSize--;
-                SDL_memset(
-                    context->keyboardInput + context->keyboardInputSize,
-                    0,
-                    AMST_MAX_KEYBOARD_INPUT_SIZE - context->keyboardInputSize
-                );
-            }
+            context->keyboardInputErasing = true;
+            context->keyboardInputSize--;
+
+            SDL_memset(
+                context->keyboardInput + context->keyboardInputSize,
+                0,
+                AMST_MAX_KEYBOARD_INPUT_SIZE - context->keyboardInputSize
+            );
             break;
         case SDL_KEYUP:
             context->keyboardInputting = false;
