@@ -65,8 +65,10 @@ void amstField(
     amstGetTextMetrics(context, label, &labelWidth, &labelHeight);
 
     if (context->keyboardInputting) {
-//        state->glyphs = defsRealloc(state->glyphs, ++(state->length));
-//        state->glyphs[state->length - 1] = context->nextGlyph;
+        context->keyboardInputting = false;
+        state->glyphs = defsRealloc(state->glyphs, ++(state->length) * sizeof(int32_t));
+        defsAssert(state->glyphs != nullptr);
+        state->glyphs[state->length - 1] = context->nextGlyph;
 
 //        const char* nextInput = nullptr;
 //        if (state->glyphs != nullptr) {
