@@ -1,7 +1,7 @@
 
-# A simple, lightweight and flexible GUI toolkit library
+# A simple, lightweight and flexible SDL2-based GUI toolkit library
 
-Currently only for Linux systems. Not thread-safe.
+Currently only for Linux systems. Not thread-safe. Supports UTF-8 encoding.
 
 Example usage is shown in the demo executable.
 
