@@ -42,7 +42,7 @@ void amstGetFieldMetrics(
     defsAssert(gInitialized);
 
     int32_t probeWidth, probeHeight;
-    amstGetTextMetrics(context, "A", &probeWidth, &probeHeight); // TODO: <---------------------------
+    amstGetTextMetrics(context, "A", &probeWidth, &probeHeight);
 
     *width = defsMax(probeWidth, labelWidth) + 10;
     *height = probeHeight + 10;
