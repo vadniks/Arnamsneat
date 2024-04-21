@@ -75,23 +75,40 @@ void amstField(
 //            nextInput = (char[4]) {};
 //            *((int32_t*) nextInput) = context->nextGlyph;
 //        }
-        SDL_Log("%d", SDL_strlen(&(context->nextGlyph)));
+//        SDL_Log("%d", SDL_strlen(&(context->nextGlyph)));
     }
 
-//    char input[state->length * sizeof(int32_t)];
-//    SDL_memset(input, 0, state->length);
-//    for (int32_t i = 0; i < state->length; i++) {
-//        int32_t glyph = state->glyphs[i];
-//
-//        for (int32_t j = 0; j < 4; j++)
-//            input[i + j] = (char) ((glyph >> (j * 8)) & 0xff);
-//    }
+    char input[state->length * sizeof(int32_t)];
+    SDL_memset(input, 0, state->length);
+    int32_t inputSize = 0;
+
+    for (int32_t i = 0; i < state->length; i++) {
+        int32_t glyph = state->glyphs[i];
+
+        for (int32_t j = 0; j < 4; j++) {
+            const char chr = (char) ((glyph >> (j * 8)) & 0xff);
+            if (chr == 0) break;
+            SDL_Log("%c", chr);
+            input[i + j] = chr;
+            inputSize++;
+        }
+    }
 
 //    for (int32_t j = 0; j < 4; j++)
 //        SDL_Log("# %c", input[j]);
 //    SDL_Log("");
-//    if (state->length > 0)
-//        amstText(context, input, amstForegroundColor, x + 5, y + 5);
+    if (state->length > 0) {
+        for (int32_t i = 0; i < inputSize; i++)
+            SDL_Log("%c", input[i]);
+
+        char xInput[inputSize + 1];
+        SDL_memcpy(xInput, input, inputSize);
+        xInput[inputSize] = 0;
+
+        SDL_Log("!%s", xInput);
+        amstText(context, input, amstForegroundColor, x + 5, y + 5);
+    }
+    SDL_Log("");
 
 
 
