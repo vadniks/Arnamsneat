@@ -35,7 +35,6 @@ static void down(void) {
 }
 
 static void checkboxCClicked(void) { gCChecked = !gCChecked; }
-static void fieldInputHandler(const char* AMST_NONNULL input) { (void) input; }
 static void radioButtonClicked(void) { gDChecked = !gDChecked; }
 static void listButtonClicked(void) { SDL_Log("list button %c clicked", gListButton); }
 
@@ -108,10 +107,10 @@ int main(void) {
         amstGetLastDrawnSizes(context, &width, &height);
         amstText(context, "Text", AMST_FOREGROUND_COLOR, 10, 10 + height * 2 + 5);
 
-        amstField(context, 100, 100, "Label 1", fieldState1, &fieldInputHandler);
+        amstField(context, 100, 100, "Label 1", fieldState1);
 
 //        amstGetLastDrawnSizes(context, &width, &height);
-//        amstField(context, 100 + width + 5, 100, "Label 2", fieldState2, &fieldInputHandler);
+//        amstField(context, 100 + width + 5, 100, "Label 2", fieldState2);
 
         amstInfiniteProgressbar(context, 100, 200);
 

@@ -34,8 +34,7 @@ void amstField(
     int32_t x,
     int32_t y,
     const char* AMST_NONNULL label,
-    AmstFieldState* AMST_NONNULL state,
-    void (* AMST_NONNULL inputHandler)(const char* AMST_NONNULL)
+    AmstFieldState* AMST_NONNULL state
 );
 
 AMST_EXPORT
