@@ -131,7 +131,11 @@ int main(void) {
         SDL_free(texts[i]);
     SDL_free(texts);
 
-    SDL_Log("label 1: %s; label 2: %s", amstFieldText(fieldState1), amstFieldText(fieldState2));
+    char* field1Text = amstFieldText(fieldState1);
+    char* field2Text = amstFieldText(fieldState2);
+    SDL_Log("label 1: %s; label 2: %s", field1Text, field2Text);
+    SDL_free(field1Text);
+    SDL_free(field2Text);
 
     amstDestroyFieldState(fieldState1);
     amstDestroyFieldState(fieldState2);

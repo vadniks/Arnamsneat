@@ -42,7 +42,7 @@ void amstGetFieldMetrics(
     defsAssert(gInitialized);
 
     int32_t probeWidth, probeHeight;
-    amstGetTextMetrics(context, "A", &probeWidth, &probeHeight);
+    amstGetTextMetrics(context, "A", &probeWidth, &probeHeight); // TODO: <---------------------------
 
     *width = defsMax(probeWidth, labelWidth) + 10;
     *height = probeHeight + 10;
@@ -62,8 +62,6 @@ void amstField(
 
     int32_t labelWidth, labelHeight;
     amstGetTextMetrics(context, label, &labelWidth, &labelHeight);
-
-
 
     int32_t textWidth;
     if (state->glyphs != nullptr) {
@@ -145,7 +143,13 @@ void amstField(
     context->lastDrawnHeight = height + 10;
 }
 
-const char* AMST_NULLABLE amstFieldText(AmstFieldState* AMST_NONNULL state) {
+char* AMST_NULLABLE amstFieldText(AmstFieldState* AMST_NONNULL state) {
     defsAssert(gInitialized);
-    return nullptr; //state->input;
+
+    char* chars = nullptr;
+    for (int32_t i = 0; i < state->length; i++) {
+
+    }
+
+    return nullptr;
 }

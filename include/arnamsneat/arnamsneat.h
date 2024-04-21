@@ -27,5 +27,7 @@
 #   define AMST_NONNULL
 #endif
 
+static_assert(sizeof(char) == 1);
+
 struct AMST_EXPORT _AmstContext;
 typedef struct _AmstContext AmstContext;

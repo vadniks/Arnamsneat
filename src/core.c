@@ -99,9 +99,6 @@ void amstProcessEvent(AmstContext* AMST_NONNULL context, SDL_Event* AMST_NONNULL
 
             context->nextGlyph = 0;
             SDL_memcpy(&(context->nextGlyph), event->text.text, size);
-//            SDL_Log("0x%08x", SDL_Swap32(context->nextGlyph));
-//            for (int32_t j = 0; j < 4; j++)
-//                SDL_Log("! %x", (char) ((context->nextGlyph >> (j * 8)) & 0xff));
             break;
     }
 }

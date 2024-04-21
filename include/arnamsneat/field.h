@@ -38,4 +38,4 @@ void amstField(
 );
 
 AMST_EXPORT
-const char* AMST_NULLABLE amstFieldText(AmstFieldState* AMST_NONNULL state);
+char* AMST_NULLABLE amstFieldText(AmstFieldState* AMST_NONNULL state);
