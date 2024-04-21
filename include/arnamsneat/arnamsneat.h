@@ -12,7 +12,6 @@
 #include <stdint.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_image.h>
 
 #if !defined(__GNUC__) || !defined(__STDC__) || __STDC_VERSION__ < 202000L // C23
 #   error

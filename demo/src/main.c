@@ -110,8 +110,8 @@ int main(void) {
 
         amstField(context, 100, 100, "Label 1", fieldState1, &fieldInputHandler);
 
-        amstGetLastDrawnSizes(context, &width, &height);
-        amstField(context, 100 + width + 5, 100, "Label 2", fieldState2, &fieldInputHandler);
+//        amstGetLastDrawnSizes(context, &width, &height);
+//        amstField(context, 100 + width + 5, 100, "Label 2", fieldState2, &fieldInputHandler);
 
         amstInfiniteProgressbar(context, 100, 200);
 

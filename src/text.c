@@ -32,7 +32,7 @@ void amstText(
     int32_t y
 ) {
     defsAssert(gInitialized);
-    SDL_Surface* surface = TTF_RenderText_Blended(context->font, text, amstMakeColor(color));
+    SDL_Surface* surface = TTF_RenderUTF8_Blended(context->font, text, amstMakeColor(color));
 
     amstImage(context, surface, x, y);
 

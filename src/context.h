@@ -11,10 +11,6 @@
 
 #include <arnamsneat/arnamsneat.h>
 
-typedef enum {
-    AMST_MAX_KEYBOARD_INPUT_SIZE = 1024
-} AmstContextIntValue;
-
 struct _AmstContext {
     SDL_Window* AMST_NONNULL window;
     SDL_Renderer* AMST_NONNULL renderer;
@@ -27,7 +23,6 @@ struct _AmstContext {
     int32_t lastDrawnHeight;
     bool keyboardInputting;
     bool keyboardInputErasing;
-    char keyboardInput[AMST_MAX_KEYBOARD_INPUT_SIZE];
-    int32_t keyboardInputSize;
+    int32_t nextGlyph;
     const void* AMST_NULLABLE activeField;
 };
