@@ -69,25 +69,22 @@ void amstField(
         state->glyphs = defsRealloc(state->glyphs, ++(state->length) * sizeof(int32_t));
         defsAssert(state->glyphs != nullptr);
         state->glyphs[state->length - 1] = context->nextGlyph;
-
-//        const char* nextInput = nullptr;
-//        if (state->glyphs != nullptr) {
-//            nextInput = (char[4]) {};
-//            *((int32_t*) nextInput) = context->nextGlyph;
-//        }
-//        SDL_Log("%d", SDL_strlen(&(context->nextGlyph)));
+    } else if (context->keyboardInputErasing && state->length > 0) {
+        context->keyboardInputErasing = false;
+        state->length--;
+        // no realloc 'cause it's freed afterward anyway
     }
 
     int32_t totalWidth = 0;
     for (int32_t i = 0; i < state->length; i++) {
-        int32_t glyph = state->glyphs[i];
-        SDL_Log("%s", &glyph);
+        const char* glyph = (char*) &(state->glyphs[i]);
+        SDL_Log("%s", glyph);
 
         int32_t w, h;
-        amstGetTextMetrics(context, &glyph, &w, &h);
+        amstGetTextMetrics(context, glyph, &w, &h);
         totalWidth += w;
 
-        amstText(context, &glyph, amstForegroundColor, x + 5 + totalWidth, y + 5);
+        amstText(context, glyph, amstForegroundColor, x + 5 + totalWidth, y + 5);
     }
     SDL_Log("");
 
