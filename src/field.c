@@ -64,18 +64,36 @@ void amstField(
     int32_t labelWidth, labelHeight;
     amstGetTextMetrics(context, label, &labelWidth, &labelHeight);
 
-    char input[state->length];
-    SDL_memset(input, 0, state->length);
-    for (int32_t i = 0; i < state->length; i++) {
-        int32_t glyph = state->glyphs[i];
+    if (context->keyboardInputting) {
+//        state->glyphs = defsRealloc(state->glyphs, ++(state->length));
+//        state->glyphs[state->length - 1] = context->nextGlyph;
 
+//        const char* nextInput = nullptr;
+//        if (state->glyphs != nullptr) {
+//            nextInput = (char[4]) {};
+//            *((int32_t*) nextInput) = context->nextGlyph;
+//        }
+        SDL_Log("%d", SDL_strlen(&(context->nextGlyph)));
     }
 
-//    const char* nextInput = nullptr;
-//    if (state->glyphs != nullptr) {
-//        nextInput = (char[4]) {};
-//        *((int32_t*) nextInput) = context->nextGlyph;
+//    char input[state->length * sizeof(int32_t)];
+//    SDL_memset(input, 0, state->length);
+//    for (int32_t i = 0; i < state->length; i++) {
+//        int32_t glyph = state->glyphs[i];
+//
+//        for (int32_t j = 0; j < 4; j++)
+//            input[i + j] = (char) ((glyph >> (j * 8)) & 0xff);
 //    }
+
+//    for (int32_t j = 0; j < 4; j++)
+//        SDL_Log("# %c", input[j]);
+//    SDL_Log("");
+//    if (state->length > 0)
+//        amstText(context, input, amstForegroundColor, x + 5, y + 5);
+
+
+
+
 
 //    int32_t textWidth, textHeight;
 //    if (state->glyphs != nullptr)
