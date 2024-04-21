@@ -78,9 +78,16 @@ void amstField(
 //        SDL_Log("%d", SDL_strlen(&(context->nextGlyph)));
     }
 
+    int32_t totalWidth = 0;
     for (int32_t i = 0; i < state->length; i++) {
         int32_t glyph = state->glyphs[i];
         SDL_Log("%s", &glyph);
+
+        int32_t w, h;
+        amstGetTextMetrics(context, &glyph, &w, &h);
+        totalWidth += w;
+
+        amstText(context, &glyph, amstForegroundColor, x + 5 + totalWidth, y + 5);
     }
     SDL_Log("");
 
