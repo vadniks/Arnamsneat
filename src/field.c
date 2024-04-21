@@ -146,10 +146,21 @@ void amstField(
 char* AMST_NULLABLE amstFieldText(AmstFieldState* AMST_NONNULL state) {
     defsAssert(gInitialized);
 
-    char* chars = nullptr;
-    for (int32_t i = 0; i < state->length; i++) {
+    char* text = nullptr;
+    int32_t textSize = 0;
 
+    for (int32_t i = 0; i < state->length; i++) {
+        const char* glyphChars = (char*) &(state->glyphs[i]);
+
+        for (int32_t j = 0; j < (int32_t) sizeof(int32_t); j++) {
+            if (glyphChars[j] == 0) break;
+            text = defsRealloc(text, ++textSize);
+            text[textSize - 1] = glyphChars[j];
+        }
     }
 
-    return nullptr;
+    text = defsRealloc(text, ++textSize);
+    text[textSize - 1] = 0;
+
+    return text;
 }
