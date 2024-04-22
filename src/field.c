@@ -67,8 +67,11 @@ void amstField(
     if (state->glyphs != nullptr) {
         textWidth = 0;
         for (int32_t i = 0; i < state->length; i++) {
+            char glyph[sizeof(int32_t) + 1] = {0};
+            *((int32_t*) glyph) = state->glyphs[i];
+
             int32_t w, h;
-            amstGetTextMetrics(context, (char*) &(state->glyphs[i]), &w, &h);
+            amstGetTextMetrics(context, glyph, &w, &h);
             textWidth += w;
         }
     } else
@@ -107,7 +110,8 @@ void amstField(
     if (state->length > 0) {
         int32_t totalWidth = 0;
         for (int32_t i = 0; i < state->length; i++) {
-            const char* glyph = (char*) &(state->glyphs[i]);
+            char glyph[sizeof(int32_t) + 1] = {0};
+            *((int32_t*) glyph) = state->glyphs[i];
 
             int32_t w, h;
             amstGetTextMetrics(context, glyph, &w, &h);
