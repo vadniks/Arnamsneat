@@ -11,7 +11,7 @@
 
 #include <arnamsneat/arnamsneat.h>
 
-struct AmstFieldState;
+struct AMST_EXPORT AmstFieldState;
 typedef struct AmstFieldState AmstFieldState;
 
 AMST_EXPORT
