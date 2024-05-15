@@ -13,7 +13,7 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wpedantic"
-typedef enum {
+typedef enum AMST_EXPORT {
     AMST_BACKGROUND_COLOR = 0x25252525,
     AMST_FOREGROUND_COLOR = 0xffffffff,
     AMST_HOVER_COLOR = 0x70707070,
